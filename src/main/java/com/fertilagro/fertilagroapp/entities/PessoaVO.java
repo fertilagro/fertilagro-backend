@@ -10,15 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Data
-@Getter
-@Setter
-@AllArgsConstructor
 @Entity
 @Table(name = "pessoa")
 public class PessoaVO {
@@ -89,8 +81,5 @@ public class PessoaVO {
 		PessoaVO other = (PessoaVO) obj;
 		return Objects.equals(id, other.id) && status == other.status;
 	}
-	
-	
-	
 	
 }

@@ -1,12 +1,9 @@
 package com.fertilagro.fertilagroapp.entities;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.OneToMany;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-@Getter
-@Setter
 @Embeddable
 public class Endereco {
     private String cep;
@@ -18,7 +15,8 @@ public class Endereco {
     private String complemento;
 
     private String bairro;
-    @OneToMany
+    @ManyToOne
+    @JoinColumn(name = "cidade_id")
     private CidadeVO cidade;
 
     private String estado;
