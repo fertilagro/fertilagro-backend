@@ -2,6 +2,9 @@ package com.fertilagro.fertilagroapp.entities;
 
 import java.util.Objects;
 
+import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
+
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,56 +25,58 @@ public class PessoaVO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
-	private boolean status;
+	private String razaoSocial;
+	private StatusEnum status;
+	@Embedded
+	Endereco endereco;
 	
-	public PessoaVO() {
+	public PessoaVO () {
 		
 	}
-	public PessoaVO(Integer id, String nome, boolean status) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.status = status;
-	}
-
 	
+	public PessoaVO(Integer id, String razaoSocial, StatusEnum status, Endereco endereco) {
+		this.id = id;
+		this.razaoSocial = razaoSocial;
+		this.status = status;
+		this.endereco = endereco;
+	}
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-	public String getNome() {
-		return nome;
+	public String getRazaoSocial() {
+		return razaoSocial;
 	}
 
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
 	}
 
-
-	public boolean isStatus() {
+	public StatusEnum getStatus() {
 		return status;
 	}
 
-
-	public void setStatus(boolean status) {
+	public void setStatus(StatusEnum status) {
 		this.status = status;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(id, status);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -82,8 +87,10 @@ public class PessoaVO {
 		if (getClass() != obj.getClass())
 			return false;
 		PessoaVO other = (PessoaVO) obj;
-		return Objects.equals(id, other.id);
-	}	
+		return Objects.equals(id, other.id) && status == other.status;
+	}
+	
+	
 	
 	
 }
