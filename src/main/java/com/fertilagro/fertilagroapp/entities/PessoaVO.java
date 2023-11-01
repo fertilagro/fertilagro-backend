@@ -35,6 +35,7 @@ public class PessoaVO {
 		this.status = status;
 	}
 
+	
 
 	public Integer getId() {
 		return id;
