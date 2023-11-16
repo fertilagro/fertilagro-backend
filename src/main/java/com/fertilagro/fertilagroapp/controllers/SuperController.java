@@ -18,6 +18,7 @@ import com.fertilagro.fertilagroapp.service.SuperService;
 
 import jakarta.persistence.MappedSuperclass;
 
+@CrossOrigin
 @MappedSuperclass
 public class SuperController<T, ID> {
 
