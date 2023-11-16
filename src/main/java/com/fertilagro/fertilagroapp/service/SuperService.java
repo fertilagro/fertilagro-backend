@@ -22,7 +22,7 @@ public class SuperService<T, ID> {
         return repository.findById(id);
     }
 
-    public T incluir(T entity) {
+    public T insere(T entity) {
         return repository.save(entity);
     }
 
