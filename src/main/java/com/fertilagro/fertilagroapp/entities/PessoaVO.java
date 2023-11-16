@@ -5,7 +5,6 @@ import org.hibernate.annotations.DynamicInsert;
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,25 +26,31 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class PessoaVO {
 	
-//	public void setId(Integer id) {
-//		this.id = id;
-//	}
-//
-//	public void setRazaoSocial(String razaoSocial) {
-//		this.razaoSocial = razaoSocial;
-//	}
-//
-//	public void setStatus(StatusEnum status) {
-//		this.status = status;
-//	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
     @Column(name = "RAZAOSOCIAL")
 	private String razaoSocial;
+    
+    @Column(name="CNPJCPF")
+    private String cnpjCpf;
 	
+    @Column(name="TELEFONE")
+    private String telefone;
+    
+    @Column(name="EMAIL")
+    private String email;
+    
+    @Column(name="ENDERECO")
+    private String endereco;
+    
+    @Column(name="CIDADE")
+    private String cidade;
+    
+    @Column(name="ESTADO")
+    private String estado;
+    
     @Column(name = "STATUS")
 	private StatusEnum status;
 
