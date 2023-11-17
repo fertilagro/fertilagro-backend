@@ -1,7 +1,6 @@
 package com.fertilagro.fertilagroapp.dto;
 
 
-import com.fertilagro.fertilagroapp.entities.Endereco;
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +18,12 @@ public class PessoaDTO {
 	
 	private Integer id;
 	private String razaoSocial;
-	private StatusEnum status;	
-	private Endereco endereco;
+    private String cnpjCpf;
+    private String telefone;
+    private String email;
+    private String endereco;
+    private String cidade;
+    private String estado;
+	private StatusEnum status;
 
 }
