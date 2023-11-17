@@ -1,7 +1,5 @@
 package com.fertilagro.fertilagroapp.entities;
 
-import org.hibernate.annotations.DynamicInsert;
-
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
 
 import jakarta.persistence.Column;
@@ -18,7 +16,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "pessoa")
-@DynamicInsert
 @Getter
 @Setter
 @NoArgsConstructor
