@@ -1,81 +1,42 @@
 package com.fertilagro.fertilagroapp.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 @Embeddable
 public class Endereco {
+	
+	@Column(name = "CEP")
     private String cep;
-
+	
+	@Column(name = "LOGRADOURO")
     private String logradouro;
 
+	@Column(name = "NUMERO")
     private String numero;
 
+	@Column(name = "COMPLEMENTO")
     private String complemento;
 
+	@Column(name = "BAIRRO")
     private String bairro;
     @ManyToOne
     @JoinColumn(name = "cidade_id")
     private CidadeVO cidade;
 
+    @Column(name = "ESTADO")
     private String estado;
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public CidadeVO getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(CidadeVO cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-    
     
 }
