@@ -6,10 +6,12 @@ import com.fertilagro.fertilagroapp.util.EnumInterface;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public enum StatusEnum implements EnumInterface {
 
 	ATIVO(0, "Ativo"),
@@ -19,8 +21,8 @@ public enum StatusEnum implements EnumInterface {
     private Integer categoria;
     @Setter
     private String nome;
-    
-    @JsonCreator
+
+	@JsonCreator
     public static StatusEnum forValue(String value) {
         for (StatusEnum categoria : StatusEnum.values()) {
             if (categoria.getNome().equals(value)) {
@@ -43,5 +45,4 @@ public enum StatusEnum implements EnumInterface {
         }
         throw new UnsupportedOperationException("A Status " + s + " não é Compatível.");
     }
-	
 }
