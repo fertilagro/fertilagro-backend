@@ -69,8 +69,9 @@ public class SuperController<T, ID> {
         }
     }
     
-    @GetMapping("/buscarPorFkField")
+    @PostMapping("/buscarPorFkField")
     public ResponseEntity<superDTO<T>> buscarPorFkField(@RequestBody T entity) {
     	return new ResponseEntity<>(HttpStatus.OK);
     }
+    
 }
