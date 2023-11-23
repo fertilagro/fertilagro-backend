@@ -66,8 +66,8 @@ public class AmostraVO {
 	@Column(name = "TIPO_ANALISE")
 	private AmostraEnum tipoAnalise;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "NUMERO_PEDIDO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long numeroPedido;
 
 	@Column(name = "VALOR")
