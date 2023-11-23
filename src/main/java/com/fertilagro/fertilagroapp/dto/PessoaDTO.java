@@ -1,6 +1,7 @@
 package com.fertilagro.fertilagroapp.dto;
 
 
+import com.fertilagro.fertilagroapp.entities.PessoaVO;
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class PessoaDTO {
+public class PessoaDTO extends superDTO<PessoaVO> {
 	
 	private Integer id;
 	private String razaoSocial;

@@ -3,9 +3,11 @@ package com.fertilagro.fertilagroapp.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fertilagro.fertilagroapp.dto.superDTO;
 import com.fertilagro.fertilagroapp.service.SuperService;
 
 import jakarta.persistence.MappedSuperclass;
@@ -64,5 +67,10 @@ public class SuperController<T, ID> {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    
+    @GetMapping("/buscarPorFkField")
+    public ResponseEntity<superDTO<T>> buscarPorFkField(@RequestBody T entity) {
+    	return new ResponseEntity<>(HttpStatus.OK);
     }
 }
