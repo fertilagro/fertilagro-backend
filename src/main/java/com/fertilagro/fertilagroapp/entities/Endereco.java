@@ -1,5 +1,7 @@
 package com.fertilagro.fertilagroapp.entities;
 
+import com.fertilagro.fertilagroapp.enumerador.EstadoEnum;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
@@ -36,7 +38,7 @@ public class Endereco {
     @JoinColumn(name = "cidade_id")
     private CidadeVO cidade;
 
-    @Column(name = "ESTADO")
-    private String estado;
+	@Column(name = "ESTADO")
+	private EstadoEnum estado;
     
 }
