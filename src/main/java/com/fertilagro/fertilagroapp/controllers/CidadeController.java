@@ -27,12 +27,14 @@ public class CidadeController extends SuperController<CidadeVO, Integer>{
 	
     @PostMapping("/buscarPorFkField")
     public ResponseEntity<?> buscarPorFkField(@RequestBody String dados) {
-    	if (uteis.contemNumeros(dados)) {
-    		
+    	CidadeVO cidade = new CidadeVO();
+    	if (uteis.ContemSomenteNumero(dados)) {
+    		 Integer id = Integer.parseInt(dados);
+    		 cidade = CidadeRepositorio.encontrarPorId(id);
     	} else {
-    		CidadeVO cidade = CidadeRepositorio.encontrarPorAtributoPersonalizado(dados);
+    		 cidade = CidadeRepositorio.encontrarPorAtributoPersonalizado(dados);
     	}
-    	return new ResponseEntity<>(HttpStatus.CREATED);
+    	return new ResponseEntity<>(cidade, HttpStatus.OK);
     }
     
 }

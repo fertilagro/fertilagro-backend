@@ -10,5 +10,8 @@ public interface CidadeRepositorio extends JpaRepository<CidadeVO, Integer> {
 	
     @Query("SELECT s FROM CidadeVO s WHERE s.nome = :valor")
     CidadeVO encontrarPorAtributoPersonalizado(@Param("valor") String valor);
+    
+    @Query("SELECT s FROM CidadeVO s WHERE s.id = :valor")
+    CidadeVO encontrarPorId(@Param("valor") Integer valor);
 	
 }
