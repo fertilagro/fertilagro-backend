@@ -32,5 +32,5 @@ public class SuperService<T, ID> {
 
     public void excluir(ID id) {
         repository.deleteById(id);
-    }
+    } 
 }
