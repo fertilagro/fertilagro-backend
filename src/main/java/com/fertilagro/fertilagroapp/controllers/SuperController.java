@@ -66,15 +66,4 @@ public class SuperController<T, ID> {
         }
     }
     
-    @PostMapping("/salvar")
-    public ResponseEntity<T> buscarPorFkField(@RequestBody T entity) {
-        T novaEntidade = service.insere(entity);
-        return new ResponseEntity<>(novaEntidade, HttpStatus.CREATED);
-    }
-    
-    @PostMapping("/buscarPorFkField")
-    public ResponseEntity<T> buscarPorFkField2(@RequestBody T id) {
-    	return new ResponseEntity<>(HttpStatus.OK);
-    }
-    
 }
