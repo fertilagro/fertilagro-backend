@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fertilagro.fertilagroapp.dto.CidadeDTO;
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
 import com.fertilagro.fertilagroapp.repositorio.CidadeRepositorio;
+import com.fertilagro.fertilagroapp.service.CidadeService;
 import com.fertilagro.fertilagroapp.service.SuperService;
 import com.fertilagro.fertilagroapp.util.uteis;
 
@@ -18,23 +20,19 @@ import com.fertilagro.fertilagroapp.util.uteis;
 public class CidadeController extends SuperController<CidadeVO, Integer>{
 	
 	@Autowired
-	private CidadeRepositorio CidadeRepositorio;
+	private CidadeService cidadeService;
 	
 	public CidadeController(SuperService<CidadeVO, Integer> service) {
 		super(service);
-		// TODO Auto-generated constructor stub
 	}
 	
     @PostMapping("/buscarPorFkField")
-    public ResponseEntity<?> buscarPorFkField(@RequestBody String dados) {
+    public ResponseEntity<CidadeDTO> buscarPorFkField(@RequestBody String dados) {
     	CidadeVO cidade = new CidadeVO();
-    	if (uteis.ContemSomenteNumero(dados)) {
-    		 Integer id = Integer.parseInt(dados);
-    		 cidade = CidadeRepositorio.encontrarPorId(id);
-    	} else {
-    		 cidade = CidadeRepositorio.encontrarPorAtributoPersonalizado(dados);
-    	}
-    	return new ResponseEntity<>(cidade, HttpStatus.OK);
+    	CidadeDTO cidadeDTO = new CidadeDTO();
+    	cidade = cidadeService.buscarPorFkField(dados); 	
+    	cidadeDTO = cidadeDTO.toDTOCidade(cidade);
+    	return new ResponseEntity<>(cidadeDTO, HttpStatus.OK);
     }
     
 }

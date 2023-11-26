@@ -21,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Table(name = "cidade")
-public class CidadeVO {
+public class CidadeVO extends SuperVO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +35,10 @@ public class CidadeVO {
 	
 	@Column(name = "ESTADO")
 	private EstadoEnum estado;
+	
+	private String labelFkField;
+	
+	public void setLabelFkField() {
+		this.labelFkField = id.toString() +" - "+ nome;
+	}
 }
