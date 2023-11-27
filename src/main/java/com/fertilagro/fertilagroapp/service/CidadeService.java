@@ -14,15 +14,15 @@ import com.fertilagro.fertilagroapp.util.uteis;
 public class CidadeService extends SuperService<CidadeVO, Integer>{
 
 	@Autowired
-	private CidadeRepositorio cidadeDAO;
+	private CidadeRepositorio cidadeRepositorio;
 	
     public CidadeVO buscarPorFkField(String dados) {
     	CidadeVO cidade = new CidadeVO();
     	if (uteis.ContemSomenteNumero(dados)) {
     		 Integer id = Integer.parseInt(dados);
-    		 cidade = cidadeDAO.encontrarPorId(id);
+    		 cidade = cidadeRepositorio.encontrarPorId(id);
     	} else {
-    		 cidade = cidadeDAO.encontrarPorAtributoPersonalizado(dados);
+    		 cidade = cidadeRepositorio.encontrarPorAtributoPersonalizado(dados);
     	}
     	return cidade;
     }

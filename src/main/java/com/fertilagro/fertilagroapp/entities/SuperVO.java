@@ -1,10 +1,14 @@
 package com.fertilagro.fertilagroapp.entities;
 
-import jakarta.persistence.PostLoad;
+import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
 
-public class SuperVO {
+@MappedSuperclass
+@Getter
+@Setter
+public abstract class SuperVO {
 
-	@PostLoad
-	public void setLabelFkField() {
-	}
+    
+    
 }

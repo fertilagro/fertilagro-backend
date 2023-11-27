@@ -15,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class PessoaDTO extends superDTO<PessoaVO> {
+public class PessoaDTO extends SuperDTO<PessoaVO> {
 	
 	private Integer id;
 	private String razaoSocial;

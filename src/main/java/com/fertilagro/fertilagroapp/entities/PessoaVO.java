@@ -21,7 +21,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class PessoaVO {
+public class PessoaVO extends SuperVO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -49,6 +49,12 @@ public class PessoaVO {
     
     @Column(name = "STATUS")
 	private StatusEnum status;
+
+//	@Override
+//	public String getLabelFkfield() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	
 }
