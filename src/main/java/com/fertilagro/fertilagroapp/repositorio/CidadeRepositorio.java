@@ -14,6 +14,6 @@ public interface CidadeRepositorio extends JpaRepository<CidadeVO, Integer> {
     Page<CidadeVO> encontrarPorAtributoPersonalizado(@Param("valor") String valor, Pageable pageable);
     
     @Query("SELECT s FROM CidadeVO s WHERE s.id = :valor")
-    CidadeVO encontrarPorId(@Param("valor") Integer valor);
+    Page<CidadeVO> encontrarPorId(@Param("valor") Integer valor, Pageable pageable);
 	
 }

@@ -18,15 +18,15 @@ public class CidadeService extends SuperService<CidadeVO, Integer>{
 	@Autowired
 	private CidadeRepositorio cidadeRepositorio;
 	
-    public CidadeVO buscarPorFkField(String dados, Pageable pageable) {
-    	CidadeVO cidade = new CidadeVO();
+    public Page<CidadeVO> buscarPorFkField(String dados, Pageable pageable) {
+    	Page<CidadeVO> lista;
     	if (uteis.ContemSomenteNumero(dados)) {
     		 Integer id = Integer.parseInt(dados);
-    		 cidade = cidadeRepositorio.encontrarPorId(id);
+    		 lista = cidadeRepositorio.encontrarPorId(id, pageable);
     	} else {
-    		//Page<CidadeVO> lista = cidadeRepositorio.encontrarPorAtributoPersonalizado(dados, pageable);
+    		 lista = cidadeRepositorio.encontrarPorAtributoPersonalizado(dados, pageable);
     	}
-    	return cidade;
+    	return lista;
     }
     
     public List<CidadeDTO> list() {
