@@ -1,5 +1,7 @@
 package com.fertilagro.fertilagroapp.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fertilagro.fertilagroapp.dto.CidadeDTO;
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
-import com.fertilagro.fertilagroapp.repositorio.CidadeRepositorio;
 import com.fertilagro.fertilagroapp.service.CidadeService;
 import com.fertilagro.fertilagroapp.service.SuperService;
-import com.fertilagro.fertilagroapp.util.uteis;
 
 @RestController
 @RequestMapping(value = "/cidades")
@@ -27,11 +27,11 @@ public class CidadeController extends SuperController<CidadeVO, Integer>{
 	}
 	
     @PostMapping("/buscarPorFkField")
-    public ResponseEntity<CidadeDTO> buscarPorFkField(@RequestBody String dados) {
+    public ResponseEntity<?> buscarPorFkField(@RequestBody String dados) {
     	CidadeVO cidade = new CidadeVO();
     	CidadeDTO cidadeDTO = new CidadeDTO();
-    	cidade = cidadeService.buscarPorFkField(dados); 	
-    	cidadeDTO = cidadeDTO.toDTOCidade(cidade);
+  // 	cidade = cidadeService.buscarPorFkField(dados); 	
+    //	cidadeDTO = cidadeDTO.toDTOCidade(cidade);
     	return new ResponseEntity<>(cidadeDTO, HttpStatus.OK);
     }
     

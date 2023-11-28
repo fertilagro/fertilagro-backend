@@ -3,6 +3,8 @@ package com.fertilagro.fertilagroapp.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fertilagro.fertilagroapp.dto.CidadeDTO;
@@ -16,13 +18,13 @@ public class CidadeService extends SuperService<CidadeVO, Integer>{
 	@Autowired
 	private CidadeRepositorio cidadeRepositorio;
 	
-    public CidadeVO buscarPorFkField(String dados) {
+    public CidadeVO buscarPorFkField(String dados, Pageable pageable) {
     	CidadeVO cidade = new CidadeVO();
     	if (uteis.ContemSomenteNumero(dados)) {
     		 Integer id = Integer.parseInt(dados);
     		 cidade = cidadeRepositorio.encontrarPorId(id);
     	} else {
-    		 cidade = cidadeRepositorio.encontrarPorAtributoPersonalizado(dados);
+    		//Page<CidadeVO> lista = cidadeRepositorio.encontrarPorAtributoPersonalizado(dados, pageable);
     	}
     	return cidade;
     }
