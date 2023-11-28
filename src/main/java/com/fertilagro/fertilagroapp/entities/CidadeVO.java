@@ -33,7 +33,7 @@ public class CidadeVO extends SuperVO {
 	//private EstadoEnum estado;
 	
 
-	public Object getLabelFkfield() {
+	public String getLabelFkfield() {
 		if(this.id != null)
 			return this.getId() != null ? this.getId()+" - "+this.getNome().toString(): null;
 		return this.id.toString();

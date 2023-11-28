@@ -12,7 +12,7 @@ public class CidadeDTO extends SuperDTO<CidadeVO> {
 	private Integer id;
 	private String nome;
 	private Integer codigoIbge;
-	private String labelFkfield;
+	private String labelFkfield22;
 	
 	public CidadeDTO() {
 		super();
