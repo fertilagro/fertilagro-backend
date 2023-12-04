@@ -1,28 +1,28 @@
 INSERT INTO cidade (
-  id, nome, codigo_ibge )
+  id, nome, estado, codigo_ibge )
 VALUES
 (
   1,
   'Goiânia',
-  5200108
+  25
 ),
 (
   15,
   'São Paulo',
-  3550308
+  19
 ),
 (
   468,
   'Rio de Janeiro',
-  3300308
+  18
 ),
 (
   745,
   'Goianira',
-  5205508
+  25
 ),
 (
   998,
   'Santos',
-  3550308
+  19
 );

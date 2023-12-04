@@ -2,6 +2,7 @@ package com.fertilagro.fertilagroapp.enumerador;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fertilagro.fertilagroapp.util.EnumInterface;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public enum AmostraEnum {
+public enum AmostraEnum implements EnumInterface {
 
 	SOLO(0, "Solo"),
 	FOLHA(1, "Folha"),

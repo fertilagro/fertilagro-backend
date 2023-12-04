@@ -1,5 +1,7 @@
 package com.fertilagro.fertilagroapp.entities;
 
+import com.fertilagro.fertilagroapp.enumerador.EstadoEnum;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,12 +28,8 @@ public class CidadeVO extends SuperVO {
 	@Column(name = "NOME")
 	private String nome;
 	
-	@Column(name = "CODIGO_IBGE")
-	private Integer codigoIbge;	
-	
-	//@Column(name = "ESTADO")
-	//private EstadoEnum estado;
-	
+	@Column(name = "ESTADO")
+	private EstadoEnum estado;	
 
 	public String getLabelFkfield() {
 		if(this.id != null)
