@@ -44,17 +44,7 @@ public class PessoaVO extends SuperVO {
     @Column(name="CIDADE")
     private String cidade;
     
-    @Column(name="ESTADO")
-    private String estado;
-    
     @Column(name = "STATUS")
 	private StatusEnum status;
-
-//	@Override
-//	public String getLabelFkfield() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
 	
 }

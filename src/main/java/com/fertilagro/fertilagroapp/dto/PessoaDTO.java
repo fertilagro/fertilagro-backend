@@ -24,7 +24,6 @@ public class PessoaDTO extends SuperDTO<PessoaVO> {
     private String email;
     private String endereco;
     private String cidade;
-    private String estado;
 	private StatusEnum status;
 
 }

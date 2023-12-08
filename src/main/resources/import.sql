@@ -1,9 +1,9 @@
 INSERT INTO cidade (
-  id, nome, estado, codigo_ibge )
+  id, nome, estado )
 VALUES
 (
   1,
-  'Goiânia',
+  'Goiania',
   25
 ),
 (
