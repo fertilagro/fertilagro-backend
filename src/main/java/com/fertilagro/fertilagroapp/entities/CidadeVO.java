@@ -25,6 +25,9 @@ public class CidadeVO extends SuperVO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	//@EmbeddedId
+	//private CidadeEmpresaIdPK id;
+	
 	@Column(name = "NOME")
 	private String nome;
 	
