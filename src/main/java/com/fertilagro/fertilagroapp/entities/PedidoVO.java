@@ -30,7 +30,7 @@ public class PedidoVO extends SuperVO {
 	private LocalDate data;
 	
 	
-	//List<PedidoItens> pedidoItens;
+//	private List<PedidoAmostraVO> pedidoAmostras;
 	
 	
 }

@@ -14,12 +14,12 @@ import lombok.Setter;
 
 @Entity
 @EqualsAndHashCode
-@Table(name = "PedidoItem")
+@Table(name = "PEDIDOAMOSTRA")
 @TabelaFilha(pai = PedidoVO.class)
 @AllArgsConstructor
 @Getter
 @Setter
-public class PedidoItemVO extends SuperVO {
+public class PedidoAmostraVO extends SuperVO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

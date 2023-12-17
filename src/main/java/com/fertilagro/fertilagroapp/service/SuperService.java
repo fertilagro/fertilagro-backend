@@ -23,7 +23,9 @@ public class SuperService<T, ID> {
     }
 
     public T insere(T entity) {
-        return repository.save(entity);
+    	validaRegrasAntesSalvar(entity);
+    	entity = repository.save(entity);
+        return entity;
     }
 
     public T alterar(T entity) {
@@ -33,4 +35,8 @@ public class SuperService<T, ID> {
     public void excluir(ID id) {
         repository.deleteById(id);
     } 
+    
+    public T validaRegrasAntesSalvar(T entity) {
+    	return entity;
+    }
 }

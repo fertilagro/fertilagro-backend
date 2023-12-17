@@ -1,8 +1,10 @@
 package com.fertilagro.fertilagroapp.entities;
 
 import com.fertilagro.fertilagroapp.enumerador.EstadoEnum;
+import com.fertilagro.fertilagroapp.pk.CidadeEmpresaIdPK;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,13 +22,9 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 @Table(name = "cidade")
 public class CidadeVO extends SuperVO {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
 	
-	//@EmbeddedId
-	//private CidadeEmpresaIdPK id;
+	@EmbeddedId
+	private CidadeEmpresaIdPK id;
 	
 	@Column(name = "NOME")
 	private String nome;

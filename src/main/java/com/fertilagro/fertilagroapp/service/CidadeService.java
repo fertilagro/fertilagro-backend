@@ -32,4 +32,10 @@ public class CidadeService extends SuperService<CidadeVO, Integer>{
     public List<CidadeDTO> list() {
     	return null;
     }
+    
+    @Override
+    public CidadeVO validaRegrasAntesSalvar(CidadeVO entity) {
+    	entity.getId().setEmpresa(1);
+    	return entity;
+    }
 }
