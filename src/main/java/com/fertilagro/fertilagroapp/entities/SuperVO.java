@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public abstract class SuperVO {
 
-    
+  //  public abstract Object getSuperId();
     
 }

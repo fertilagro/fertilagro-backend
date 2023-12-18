@@ -25,4 +25,11 @@ public class PedidoAmostraVO extends SuperVO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	/*@Override
+	public Integer getSuperId() {
+		if (this.id != null) {
+			return this.id.getId();
+		}
+		return null;
+	}*/
 }

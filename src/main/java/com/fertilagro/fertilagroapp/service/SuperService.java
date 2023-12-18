@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
+
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
@@ -23,7 +25,13 @@ public class SuperService<T, ID> {
     }
 
     public T insere(T entity) {
-    	validaRegrasAntesSalvar(entity);
+    	
+    	
+        EntityUteis.setIdCrud(entity, 1, entity.getSuperId());
+    	
+    	
+    	
+    	entity = validaRegrasAntesSalvar(entity);
     	entity = repository.save(entity);
         return entity;
     }

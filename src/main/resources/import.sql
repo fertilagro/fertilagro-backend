@@ -26,3 +26,12 @@ VALUES
   'Santos',
   19
 );
+
+CREATE TABLE public.cidade (
+	empresa int2 NOT NULL,
+	id int2 NOT NULL,
+	nome varchar(60) NOT NULL,
+	estado int2 NOT NULL
+);
+
+ALTER TABLE public.cidade ADD CONSTRAINT cidade_pk PRIMARY KEY (empresa,id);

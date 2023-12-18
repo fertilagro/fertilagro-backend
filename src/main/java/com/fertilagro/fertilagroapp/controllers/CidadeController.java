@@ -28,19 +28,16 @@ public class CidadeController extends SuperController<CidadeVO, Integer>{
 	
     @PostMapping("/buscarPorFkField")
     public ResponseEntity<Page<CidadeVO>> buscarPorFkField(@RequestBody String dados, Pageable pageable) {
-    	//CidadeVO cidade = new CidadeVO();
-    	//CidadeDTO cidadeDTO = new CidadeDTO();
     	Page<CidadeVO> cidades = cidadeService.buscarPorFkField(dados, pageable); 	
-    //	cidadeDTO = cidadeDTO.toDTOCidade(cidade);
     	return new ResponseEntity<>(cidades, HttpStatus.OK);
     }
     
-    @Override
+   /* @Override
     @PostMapping("/salvar")
     public ResponseEntity<CidadeVO> incluir(@RequestBody CidadeVO entity) {
     	CidadeVO novaEntidade = cidadeService.insere(entity);
         return new ResponseEntity<>(novaEntidade, HttpStatus.CREATED);
-    }
+    }*/
     
 }
 

@@ -10,4 +10,8 @@ public class EntityUteis {
 		return tabelaFilha != null;
 	}
 	
+	public static Object setIdCrud(Object crud, Integer empresa, Object id) {
+		return null;
+	}
+	
 }

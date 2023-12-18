@@ -1,14 +1,13 @@
 package com.fertilagro.fertilagroapp.entities;
 
+import java.io.Serializable;
+
 import com.fertilagro.fertilagroapp.enumerador.EstadoEnum;
 import com.fertilagro.fertilagroapp.pk.CidadeEmpresaIdPK;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,8 +20,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Table(name = "cidade")
-public class CidadeVO extends SuperVO {
-	
+public class CidadeVO extends SuperVO implements Serializable {
+
+	private static final long serialVersionUID = -4236882528226531378L;
+
 	@EmbeddedId
 	private CidadeEmpresaIdPK id;
 	
@@ -34,7 +35,15 @@ public class CidadeVO extends SuperVO {
 
 	public String getLabelFkfield() {
 		if(this.id != null)
-			return this.getId() != null ? this.getId()+" - "+this.getNome().toString(): null;
+			return this.getId() != null ? this.getId().getId()+" - "+this.getNome().toString(): null;
 		return this.id.toString();
 	}
+
+/*	@Override
+	public Integer getSuperId() {
+		if (this.id != null) {
+			return this.id.getId();
+		}
+		return null;
+	}*/
 }

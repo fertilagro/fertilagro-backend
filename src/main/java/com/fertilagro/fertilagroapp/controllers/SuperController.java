@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fertilagro.fertilagroapp.service.SuperService;
-import com.fertilagro.fertilagroapp.util.uteis;
 
 import jakarta.persistence.MappedSuperclass;
 
