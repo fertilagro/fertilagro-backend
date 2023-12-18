@@ -38,6 +38,13 @@ public class CidadeVO extends SuperVO implements Serializable {
 			return this.getId() != null ? this.getId().getId()+" - "+this.getNome().toString(): null;
 		return this.id.toString();
 	}
+	
+    @Override
+    protected void setGerarIdentificadorId(Integer id) {
+        if (this.id != null) {
+            this.id.setId(id);
+        }
+    }
 
 /*	@Override
 	public Integer getSuperId() {

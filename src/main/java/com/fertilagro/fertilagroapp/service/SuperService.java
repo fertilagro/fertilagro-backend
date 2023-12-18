@@ -27,7 +27,7 @@ public class SuperService<T, ID> {
     public T insere(T entity) {
     	
     	
-        EntityUteis.setIdCrud(entity, 1, entity.getSuperId());
+      //  EntityUteis.setIdCrud(entity, 1, entity.getSuperId());
     	
     	
     	
