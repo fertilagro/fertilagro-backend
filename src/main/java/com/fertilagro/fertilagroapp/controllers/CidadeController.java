@@ -35,5 +35,12 @@ public class CidadeController extends SuperController<CidadeVO, Integer>{
     	return new ResponseEntity<>(cidades, HttpStatus.OK);
     }
     
+    @Override
+    @PostMapping("/salvar")
+    public ResponseEntity<CidadeVO> incluir(@RequestBody CidadeVO entity) {
+    	CidadeVO novaEntidade = cidadeService.insere(entity);
+        return new ResponseEntity<>(novaEntidade, HttpStatus.CREATED);
+    }
+    
 }
 
