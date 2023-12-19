@@ -24,7 +24,20 @@ public class PedidoAmostraVO extends SuperVO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
+	@Override
+	protected void setGerarIdentificadorId(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object getSuperId() {
+	/*	if (this.id != null) {
+			return this.id.getId();
+		}*/
+		return null;
+	}
    /* @Override
     protected void setGerarIdentificadorId(Integer id) {
         if (this.id != null) {

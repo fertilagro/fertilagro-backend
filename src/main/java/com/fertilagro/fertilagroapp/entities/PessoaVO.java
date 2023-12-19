@@ -1,8 +1,10 @@
 package com.fertilagro.fertilagroapp.entities;
 
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
+import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,9 +24,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class PessoaVO extends SuperVO {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+
+	@EmbeddedId
+	private EmpresaPadraoIdPK id;
 	
     @Column(name = "RAZAOSOCIAL")
 	private String razaoSocial;
@@ -46,5 +48,20 @@ public class PessoaVO extends SuperVO {
     
     @Column(name = "STATUS")
 	private StatusEnum status;
+
+	@Override
+	protected void setGerarIdentificadorId(Integer id) {
+        if (this.id != null) {
+            this.id.setId(id);
+        }
+	}
+
+	@Override
+	public Object getSuperId() {
+		if (this.id != null) {
+			return this.id.getId();
+		}
+		return null;
+	}
 	
 }

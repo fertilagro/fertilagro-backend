@@ -6,9 +6,11 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fertilagro.fertilagroapp.conversor.LocalDateAttributeConverter;
 import com.fertilagro.fertilagroapp.enumerador.AmostraEnum;
+import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -31,11 +33,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Table(name = "AMOSTRA")
-public class AmostraVO {
+public class AmostraVO extends SuperVO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@EmbeddedId
+	private EmpresaPadraoIdPK id;
 	
 	@Column(name = "PROPRIEDADE")
 	private String propriedade;
@@ -76,10 +77,25 @@ public class AmostraVO {
 	@Column(name = "OBSERVACAO", length = 500)
 	private String observacao;
 	
-	public void setCliente(PessoaVO pessoa) {
+	/*public void setCliente(PessoaVO pessoa) {
 		this.cliente = pessoa;
 		if(pessoa != null) {
 			setClienteId(pessoa.getId());
 		}
+	}*/
+
+	@Override
+	protected void setGerarIdentificadorId(Integer id) {
+        if (this.id != null) {
+            this.id.setId(id);
+        }
+	}
+
+	@Override
+	public Object getSuperId() {
+		if (this.id != null) {
+			return this.id.getId();
+		}
+		return null;
 	}
 }

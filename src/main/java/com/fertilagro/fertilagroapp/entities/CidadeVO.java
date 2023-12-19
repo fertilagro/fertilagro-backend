@@ -3,7 +3,7 @@ package com.fertilagro.fertilagroapp.entities;
 import java.io.Serializable;
 
 import com.fertilagro.fertilagroapp.enumerador.EstadoEnum;
-import com.fertilagro.fertilagroapp.pk.CidadeEmpresaIdPK;
+import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -25,7 +25,7 @@ public class CidadeVO extends SuperVO implements Serializable {
 	private static final long serialVersionUID = -4236882528226531378L;
 
 	@EmbeddedId
-	private CidadeEmpresaIdPK id;
+	private EmpresaPadraoIdPK id;
 	
 	@Column(name = "NOME")
 	private String nome;
@@ -46,11 +46,11 @@ public class CidadeVO extends SuperVO implements Serializable {
         }
     }
 
-/*	@Override
+	@Override
 	public Integer getSuperId() {
 		if (this.id != null) {
 			return this.id.getId();
 		}
 		return null;
-	}*/
+	}
 }

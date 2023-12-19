@@ -14,15 +14,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
+import com.fertilagro.fertilagroapp.entities.SuperVO;
 import com.fertilagro.fertilagroapp.service.SuperService;
 
 import jakarta.persistence.MappedSuperclass;
 
 @CrossOrigin
 @MappedSuperclass
-public class SuperController<T, ID> {
+public class SuperController<T extends SuperVO, ID> {
 
     private final SuperService<T, ID> service;
+    
+    protected Class<T> voClass;
+  //  protected Class<C> dtoClass;
 
     @Autowired
     public SuperController(SuperService<T, ID> service) {
@@ -41,7 +46,11 @@ public class SuperController<T, ID> {
     }
 
     @PostMapping("/salvar")
-    public ResponseEntity<T> incluir(@RequestBody T entity) {
+    public ResponseEntity<T> incluir(@RequestBody T entity) throws IllegalArgumentException, IllegalAccessException {
+    	
+        EntityUteis.setIdCrud(entity, 1, entity.getSuperId());
+    	
+    	
         T novaEntidade = service.insere(entity);
         return new ResponseEntity<>(novaEntidade, HttpStatus.CREATED);
     }

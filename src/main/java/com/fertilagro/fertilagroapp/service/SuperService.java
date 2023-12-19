@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
+import com.fertilagro.fertilagroapp.entities.SuperVO;
 
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class SuperService<T, ID> {
+public class SuperService<T extends SuperVO, ID> {
 
     @Autowired
     private JpaRepository<T, ID> repository;
@@ -25,10 +26,6 @@ public class SuperService<T, ID> {
     }
 
     public T insere(T entity) {
-    	
-    	
-      //  EntityUteis.setIdCrud(entity, 1, entity.getSuperId());
-    	
     	
     	
     	entity = validaRegrasAntesSalvar(entity);

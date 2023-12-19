@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class CidadeEmpresaIdPK implements Serializable {
+public class EmpresaPadraoIdPK implements Serializable {
 
 	private static final long serialVersionUID = 4171333912350755212L;
 
