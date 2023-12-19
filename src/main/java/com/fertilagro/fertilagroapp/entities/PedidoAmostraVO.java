@@ -26,7 +26,7 @@ public class PedidoAmostraVO extends SuperVO {
 	private Integer id;
 
 	@Override
-	protected void setGerarIdentificadorId(Integer id) {
+	public void setGerarIdentificadorId(Integer id) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -38,18 +38,5 @@ public class PedidoAmostraVO extends SuperVO {
 		}*/
 		return null;
 	}
-   /* @Override
-    protected void setGerarIdentificadorId(Integer id) {
-        if (this.id != null) {
-            this.id.setId(id);
-        }
-    }*/
-    
-	/*@Override
-	public Integer getSuperId() {
-		if (this.id != null) {
-			return this.id.getId();
-		}
-		return null;
-	}*/
+
 }

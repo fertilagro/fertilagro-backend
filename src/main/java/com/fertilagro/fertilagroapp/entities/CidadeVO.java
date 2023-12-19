@@ -40,7 +40,7 @@ public class CidadeVO extends SuperVO implements Serializable {
 	}
 	
     @Override
-    protected void setGerarIdentificadorId(Integer id) {
+    public void setGerarIdentificadorId(Integer id) {
         if (this.id != null) {
             this.id.setId(id);
         }

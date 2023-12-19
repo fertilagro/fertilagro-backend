@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public abstract class SuperVO {
 	
-    protected abstract void setGerarIdentificadorId(Integer id);
+    public abstract void setGerarIdentificadorId(Integer id);
 
     public abstract Object getSuperId();
     

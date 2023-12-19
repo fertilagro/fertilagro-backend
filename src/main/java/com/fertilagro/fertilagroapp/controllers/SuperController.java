@@ -46,12 +46,15 @@ public class SuperController<T extends SuperVO, ID> {
     }
 
     @PostMapping("/salvar")
-    public ResponseEntity<T> incluir(@RequestBody T entity) throws IllegalArgumentException, IllegalAccessException {
-    	
-        EntityUteis.setIdCrud(entity, 1, entity.getSuperId());
-    	
-    	
-        T novaEntidade = service.insere(entity);
+    public ResponseEntity<T> incluir(@RequestBody T entity)  {
+        T novaEntidade = null;
+        try {
+            EntityUteis.setIdCrud(entity, 1, entity.getSuperId());
+            novaEntidade = service.insere(entity);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
         return new ResponseEntity<>(novaEntidade, HttpStatus.CREATED);
     }
 
@@ -74,5 +77,7 @@ public class SuperController<T extends SuperVO, ID> {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
+
     
 }

@@ -6,6 +6,9 @@ import com.fertilagro.fertilagroapp.anotacao.TabelaFilha;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 public class EntityUteis {
 
 	public static boolean isTabelaFilha(Class<? extends SuperVO> class1) {
@@ -52,5 +55,35 @@ public class EntityUteis {
 			idField.setAccessible(accessible);
 		}
 		return crud;
-	}	
+	}
+    
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static String getNomeTabelaEntidade(Class entity) {
+		String name = null;
+		Class superClass = entity.getSuperclass();
+		if (superClass != null) {
+			@SuppressWarnings("unchecked")
+			Table table = (Table) superClass.getAnnotation(Table.class);
+			if (table != null && table.name() != null && !table.name().isEmpty()) {
+				return table.name();
+			}
+
+		}
+		Table table = (Table) entity.getAnnotation(Table.class);
+		if (table != null && table.name() != null && !table.name().isEmpty()) {
+			if(table.schema() != null && !table.schema().isEmpty())
+				name = table.schema()+"."+table.name();
+			else
+				name = table.name();
+		} else {
+			Entity entityAnnotation = (Entity) entity.getAnnotation(Entity.class);
+			if (entityAnnotation != null && entityAnnotation.name() != null && !entityAnnotation.name().isEmpty()) {
+				name = entityAnnotation.name();
+			} else {
+				name = entity.getSimpleName();
+			}
+		}
+		return name;
+	}
+    
 }

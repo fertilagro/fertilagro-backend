@@ -41,10 +41,10 @@ public class AmostraVO extends SuperVO {
 	@Column(name = "PROPRIEDADE")
 	private String propriedade;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CLIENTE", referencedColumnName = "ID", insertable = false, updatable = false,
 			foreignKey = @ForeignKey(name = "cliente"),nullable = true) 
-	private PessoaVO cliente;
+	private PessoaVO cliente;*/
 	
 	@Column(name = "CLIENTE")
 	private Integer clienteId;
@@ -85,7 +85,7 @@ public class AmostraVO extends SuperVO {
 	}*/
 
 	@Override
-	protected void setGerarIdentificadorId(Integer id) {
+	public void setGerarIdentificadorId(Integer id) {
         if (this.id != null) {
             this.id.setId(id);
         }
