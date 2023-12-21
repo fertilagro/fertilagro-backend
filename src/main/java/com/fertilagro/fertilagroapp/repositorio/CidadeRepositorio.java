@@ -1,6 +1,7 @@
 package com.fertilagro.fertilagroapp.repositorio;
 
-import org.springframework.data.domain.Page;
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
@@ -12,7 +13,7 @@ import jakarta.persistence.Query;
 public class CidadeRepositorio extends SuperRepositorio<CidadeVO> {
 	
 	@SuppressWarnings("unchecked")
-	public Page<CidadeVO> encontrarPorAtributoPersonalizado(String nome) {
+	public List<CidadeVO> encontrarPorAtributoPersonalizado(String nome) {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(" SELECT s ");
@@ -26,7 +27,7 @@ public class CidadeRepositorio extends SuperRepositorio<CidadeVO> {
 		createQuery.setParameter("empresa", 1);
 		 
 		try {	
-			return (Page<CidadeVO>) createQuery.getSingleResult(); 
+			return (List<CidadeVO>) createQuery.getSingleResult(); 
 		}catch (NoResultException nre){
 			return null;
 		} 

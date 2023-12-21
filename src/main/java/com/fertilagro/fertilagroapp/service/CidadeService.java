@@ -1,10 +1,9 @@
 package com.fertilagro.fertilagroapp.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
@@ -25,8 +24,8 @@ public class CidadeService extends SuperService<CidadeVO> implements Serializabl
 		return cidadeRepositorio;
 	}
 	
-    public Page<CidadeVO> buscarPorFkField(String dados, Pageable pageable) {
-    	Page<CidadeVO> lista = null;
+    public List<CidadeVO> buscarPorFkField(String dados) {
+    	List<CidadeVO> lista = null;
     	if (uteis.ContemSomenteNumero(dados)) {
     		 Integer id = Integer.parseInt(dados);
     		// lista = cidadeRepositorio.encontrarPorId(id);

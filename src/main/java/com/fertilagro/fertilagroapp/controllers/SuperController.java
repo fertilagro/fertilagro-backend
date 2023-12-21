@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,7 @@ import com.fertilagro.fertilagroapp.dto.SuperDTO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 import com.fertilagro.fertilagroapp.service.SuperService;
 
-//@PropertySource("classpath:/bundle_pt_BR.properties")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> {
 
     protected abstract SuperService<T> getSuperControler();

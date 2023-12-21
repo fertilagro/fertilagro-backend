@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fertilagro.fertilagroapp.util.EnumInterface;
 
-@CrossOrigin
 @RestController
 @RequestMapping(value = "/enums")
 public class EnumController {
