@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fertilagro.fertilagroapp.entities.AmostraVO;
 import com.fertilagro.fertilagroapp.enumerador.AmostraEnum;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +18,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class AmostraDTO {
+public class AmostraDTO extends SuperDTO<AmostraVO> {
+	
 	private Integer id;
 	
 	private String propriedade;

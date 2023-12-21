@@ -18,5 +18,11 @@ public class CidadeDTO extends SuperDTO<CidadeVO> {
 		super();
 	}
 	
+	public CidadeDTO convertVOparaDTO(CidadeVO cidade) {
+		/*CidadeDTO cidadeDTO = new CidadeDTO();
+		cidadeDTO.setId(cidade.getId());*/
+		return null;
+	}
+	
 
 }

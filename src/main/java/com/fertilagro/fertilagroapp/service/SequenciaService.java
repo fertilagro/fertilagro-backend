@@ -1,14 +1,26 @@
 package com.fertilagro.fertilagroapp.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fertilagro.fertilagroapp.entities.SequenciaVO;
-import com.fertilagro.fertilagroapp.pk.SequenciaPK;
+import com.fertilagro.fertilagroapp.repositorio.SequenciaRepositorio;
+import com.fertilagro.fertilagroapp.repositorio.SuperRepositorio;
 
 @Service
-public class SequenciaService extends SuperService<SequenciaVO, Integer> {
+public class SequenciaService extends SuperService<SequenciaVO> {
 
-	public SequenciaVO gerarChave(SequenciaPK sequencia) {
-		return null;
+	@Autowired
+	private SequenciaRepositorio sequenciaRepositorio;
+	
+	public SequenciaService(SequenciaRepositorio sequenciaRepositorio) {
+		this.sequenciaRepositorio = sequenciaRepositorio;
 	}
+	
+	@Override
+	protected SuperRepositorio<SequenciaVO> getRepositorio() {
+		return sequenciaRepositorio;
+	}
+
+
 }

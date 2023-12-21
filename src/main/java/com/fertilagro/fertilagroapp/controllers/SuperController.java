@@ -1,56 +1,44 @@
 package com.fertilagro.fertilagroapp.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
+import com.fertilagro.fertilagroapp.dto.SuperDTO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 import com.fertilagro.fertilagroapp.service.SuperService;
 
-import jakarta.persistence.MappedSuperclass;
+//@PropertySource("classpath:/bundle_pt_BR.properties")
+public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> {
 
-@CrossOrigin
-@MappedSuperclass
-public class SuperController<T extends SuperVO, ID> {
-
-    private final SuperService<T, ID> service;
+    protected abstract SuperService<T> getSuperControler();
     
     protected Class<T> voClass;
-  //  protected Class<C> dtoClass;
-
-    @Autowired
-    public SuperController(SuperService<T, ID> service) {
-        this.service = service;
-    }
+    protected Class<C> dtoClass;
 
     @GetMapping
     public List<T> listarTodos() {
-        return service.listarTodos();
+        return getSuperControler().listarTodos();
     }
 
-    @GetMapping("/{id}")
+    /*@GetMapping("/{id}")
     public ResponseEntity<T> buscarPorId(@PathVariable ID id) {
         Optional<T> entity = service.buscarPorId(id);
         return entity.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+    }*/
 
     @PostMapping("/salvar")
     public ResponseEntity<T> incluir(@RequestBody T entity)  {
         T novaEntidade = null;
         try {
             EntityUteis.setIdCrud(entity, 1, entity.getSuperId());
-            novaEntidade = service.insere(entity);
+            novaEntidade = getSuperControler().insere(entity);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,7 +46,7 @@ public class SuperController<T extends SuperVO, ID> {
         return new ResponseEntity<>(novaEntidade, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+   /* @PutMapping("/{id}")
     public ResponseEntity<T> alterar(@PathVariable ID id, @RequestBody T entity) {
         if (service.buscarPorId(id).isPresent()) {
             T entidadeAlterada = service.alterar(entity);
@@ -76,7 +64,7 @@ public class SuperController<T extends SuperVO, ID> {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
     
 
     

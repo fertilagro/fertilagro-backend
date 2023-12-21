@@ -1,9 +1,10 @@
 package com.fertilagro.fertilagroapp.repositorio;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.fertilagro.fertilagroapp.entities.PessoaVO;
 
-public interface PessoaRepositorio extends JpaRepository<PessoaVO, Integer>{
+@Repository
+public class PessoaRepositorio extends SuperRepositorio<PessoaVO>{
 	
 }

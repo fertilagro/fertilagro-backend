@@ -1,18 +1,11 @@
 package com.fertilagro.fertilagroapp.repositorio;
 
-import org.springframework.stereotype.Repository;
-
 import com.fertilagro.fertilagroapp.arquitetura.BaseRepositorio;
-import com.fertilagro.fertilagroapp.entities.CidadeVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.Query;
-
-@Repository
 public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositorio {
 	
-	public String getValorParametro(Integer empresa, Integer filial, String idParametro) {		
+	/*public String getValorParametro(Integer empresa, Integer filial, String idParametro) {		
 		StringBuilder sb = new StringBuilder();
 		sb.append(" SELECT p ");
 		sb.append(" FROM ").append(CidadeVO.class.getSimpleName()).append(" p ");
@@ -36,6 +29,6 @@ public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositori
 		}catch (NoResultException nre){
 			return "";
 		}
-	}
+	}*/
 	
 }
