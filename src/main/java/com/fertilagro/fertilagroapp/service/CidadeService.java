@@ -13,18 +13,18 @@ import com.fertilagro.fertilagroapp.repositorio.CidadeRepositorio;
 import com.fertilagro.fertilagroapp.util.uteis;
 
 @Service
-public class CidadeService extends SuperService<CidadeVO, Integer>{
+public class CidadeService {
 
 	@Autowired
 	private CidadeRepositorio cidadeRepositorio;
 	
     public Page<CidadeVO> buscarPorFkField(String dados, Pageable pageable) {
-    	Page<CidadeVO> lista;
+    	Page<CidadeVO> lista = null;
     	if (uteis.ContemSomenteNumero(dados)) {
     		 Integer id = Integer.parseInt(dados);
-    		 lista = cidadeRepositorio.encontrarPorId(id, pageable);
+    		// lista = cidadeRepositorio.encontrarPorId(id, pageable);
     	} else {
-    		 lista = cidadeRepositorio.encontrarPorAtributoPersonalizado(dados, pageable);
+    		 lista = cidadeRepositorio.encontrarPorAtributoPersonalizado(dados);
     	}
     	return lista;
     }

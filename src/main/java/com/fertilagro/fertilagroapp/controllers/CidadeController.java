@@ -22,10 +22,6 @@ public class CidadeController extends SuperController<CidadeVO, Integer>{
 	@Autowired
 	private CidadeService cidadeService;
 	
-	public CidadeController(SuperService<CidadeVO, Integer> service) {
-		super(service);
-	}
-	
     @PostMapping("/buscarPorFkField")
     public ResponseEntity<Page<CidadeVO>> buscarPorFkField(@RequestBody String dados, Pageable pageable) {
     	Page<CidadeVO> cidades = cidadeService.buscarPorFkField(dados, pageable); 	
