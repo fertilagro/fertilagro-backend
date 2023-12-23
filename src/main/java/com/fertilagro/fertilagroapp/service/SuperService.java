@@ -4,6 +4,9 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
 import com.fertilagro.fertilagroapp.entities.SequenciaVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
@@ -18,6 +21,8 @@ public abstract class SuperService<T extends SuperVO> {
 //	@Autowired
 //	private SuperRepositorio getDAO;
 	
+	protected abstract SequenciaService getSequenciaService();
+	
 	protected abstract SuperRepositorio<T> getRepositorio();
 	
     public List<T> listarTodos() {
@@ -30,15 +35,15 @@ public abstract class SuperService<T extends SuperVO> {
         return null;
     }
 
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public T insere(T entity) {
     	entity = geraSequencia(entity);
-    	//entity = repository.save(entity);
+    	entity = getRepositorio().insere(entity);
         return entity;
     }
 
     public T alterar(T entity) {
-     //   return repository.save(entity);
-        return null;
+    	return entity = getRepositorio().altera(entity);
     }
 
     public void excluir() {
@@ -51,19 +56,9 @@ public abstract class SuperService<T extends SuperVO> {
     	sequenciaPK.setEmpresa(empresa);
     	String tabela = EntityUteis.getNomeTabelaEntidade(entity.getClass());
     	sequenciaPK.setTabela(tabela);
-    	SequenciaVO sequenciaVO = gerarChave(sequenciaPK);
-    	
+    	SequenciaVO sequenciaVO = getSequenciaService().gerarChave(sequenciaPK);
 		entity.setGerarIdentificadorId(sequenciaVO.getId());
-		
     	return entity;
-    }
-    
-    private SequenciaVO gerarChave(SequenciaPK sequenciaPK) {
-    	
-    	
-    	
-    	
-    	return null;
     }
     
     private Integer getIdEmpresa(T entity) {

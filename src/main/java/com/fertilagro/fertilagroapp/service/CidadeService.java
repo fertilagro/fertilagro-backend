@@ -18,10 +18,17 @@ public class CidadeService extends SuperService<CidadeVO> implements Serializabl
 	
 	@Autowired
 	private CidadeRepositorio cidadeRepositorio;
+	@Autowired
+	private SequenciaService sequenciaService;
 	
 	@Override
 	protected SuperRepositorio<CidadeVO> getRepositorio() {
 		return cidadeRepositorio;
+	}
+	
+	@Override
+	protected SequenciaService getSequenciaService() {
+		return sequenciaService;
 	}
 	
     public List<CidadeVO> buscarPorFkField(String dados) {
@@ -34,5 +41,7 @@ public class CidadeService extends SuperService<CidadeVO> implements Serializabl
     	}
     	return lista;
     }
+
+
   
 }

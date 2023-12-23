@@ -12,6 +12,8 @@ public class PessoaService extends SuperService<PessoaVO> {
 
 	@Autowired
 	private PessoaRepositorio pessoaRepositorio;
+	@Autowired
+	private SequenciaService sequenciaService;
 	
 	public PessoaService(PessoaRepositorio pessoaRepositorio) {
 		this.pessoaRepositorio = pessoaRepositorio;
@@ -20,6 +22,11 @@ public class PessoaService extends SuperService<PessoaVO> {
 	@Override
 	protected SuperRepositorio<PessoaVO> getRepositorio() {
 		return pessoaRepositorio;
+	}
+	
+	@Override
+	protected SequenciaService getSequenciaService() {
+		return sequenciaService;
 	}
 
 }

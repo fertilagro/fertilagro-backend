@@ -2,7 +2,7 @@ CREATE TABLE public.sequencia (
 	empresa int2 NOT NULL ,
 	tabela varchar(60) NOT NULL,
 	sequencia int4 NOT NULL,
-	CONSTRAINT sequencia_pk PRIMARY KEY (empresa,tabela)
+	CONSTRAINT sequencia_pk PRIMARY KEY (empresa,tabela,sequencia)
 );
 
 

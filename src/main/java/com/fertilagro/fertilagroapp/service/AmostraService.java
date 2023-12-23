@@ -12,13 +12,21 @@ public class AmostraService extends SuperService<AmostraVO>{
 
 	@Autowired
 	private AmostraRepositorio amostraRepositorio;
+	@Autowired
+	private SequenciaService sequenciaService;
 	
 	public AmostraService(AmostraRepositorio amostraRepositorio) {
 		this.amostraRepositorio = amostraRepositorio;
 	}
+	
 	@Override
 	protected SuperRepositorio<AmostraVO> getRepositorio() {
 		return amostraRepositorio;
+	}
+
+	@Override
+	protected SequenciaService getSequenciaService() {
+		return sequenciaService;
 	}
 
 }
