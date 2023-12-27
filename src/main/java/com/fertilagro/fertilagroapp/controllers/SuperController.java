@@ -3,7 +3,6 @@ package com.fertilagro.fertilagroapp.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -71,7 +70,8 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
         }
     }*/
     
-    @PostMapping("/buscarPorFkField")
+    @SuppressWarnings("unchecked")
+	@PostMapping("/buscarPorFkField")
     public ResponseEntity<List<FkfieldDTO<T, C>>> buscarPorFkField(@RequestBody String dados) {
         List<FkfieldDTO<T, C>> retorno = null;
     	List<T> listaCrudVO = getSuperControler().buscarPorFkField(dados);
@@ -83,9 +83,7 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
             	 CidadeVO crud = new CidadeVO();
             	 crud = (CidadeVO) crudVO;
                 
-                crudDTO.convertVOparaDTO(crud, crudDTO);
-                
-              //  crudDTO.objetoParaDTO(crudVO, crudDTO, false, false);
+                crudDTO.convertVOparaDTOCidade(crud, crudDTO);
                 retorno.add(new FkfieldDTO<T, C>((C) crudDTO));
             }
         }

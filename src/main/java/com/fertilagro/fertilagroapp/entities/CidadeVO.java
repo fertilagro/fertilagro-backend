@@ -33,6 +33,7 @@ public class CidadeVO extends SuperVO implements Serializable {
 	@Column(name = "ESTADO")
 	private EstadoEnum estado;	
 
+    @Override
 	public String getLabelFkfield() {
 		if(this.id != null)
 			return this.getId() != null ? this.getId().getId()+" - "+this.getNome().toString(): null;

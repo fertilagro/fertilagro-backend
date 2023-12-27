@@ -20,9 +20,7 @@ public abstract class SuperDTO<T extends SuperVO> {
 		this.labelFkfield = labelFkfield;
 	}
 
-	public CidadeDTO convertVOparaDTO(CidadeVO cidade, CidadeDTO cidadeDTO) {
-		//CidadeDTO cidadeDTO = new CidadeDTO();
-		
+	public CidadeDTO convertVOparaDTOCidade(CidadeVO cidade, CidadeDTO cidadeDTO) {
 		EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
 		id.setEmpresa(cidade.getId().getEmpresa());
 		id.setId(cidade.getId().getId());
@@ -30,7 +28,7 @@ public abstract class SuperDTO<T extends SuperVO> {
 		cidadeDTO.setId(id);
 		cidadeDTO.setNome(cidade.getNome());
 		cidadeDTO.setEstado(cidade.getEstado());
-		//CidadeDTO.setLabelFkfield(cidade.getLabelFkfield());
+		cidadeDTO.setLabelFkfield(cidade.getLabelFkfield());
 		return cidadeDTO;
 	}
 	
