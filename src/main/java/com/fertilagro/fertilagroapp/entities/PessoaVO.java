@@ -6,9 +6,9 @@ import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -43,8 +43,13 @@ public class PessoaVO extends SuperVO {
     @Column(name="ENDERECO")
     private String endereco;
     
-    @Column(name="CIDADE")
-    private String cidade;
+	@ManyToOne
+	@JoinColumns(value = {
+			@JoinColumn(name = "empresa", referencedColumnName = "empresa", insertable = false, updatable = false),
+			@JoinColumn(name = "cidade", referencedColumnName = "id", insertable = false, updatable = false)})
+	private CidadeVO cidade;
+	@Column(name="CIDADE")
+	private Integer cidadeId;
     
     @Column(name = "STATUS")
 	private StatusEnum status;
@@ -68,6 +73,13 @@ public class PessoaVO extends SuperVO {
 	public String getLabelFkfield() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setCidade(CidadeVO cidade) {
+		this.cidade = cidade;
+		if (cidade != null) {
+			setCidadeId(cidade.getSuperId());
+		}
 	}
 	
 }

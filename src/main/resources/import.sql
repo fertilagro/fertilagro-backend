@@ -14,3 +14,17 @@ CREATE TABLE public.cidade (
   CONSTRAINT cidade_pk PRIMARY KEY (empresa,id);
 );
 
+
+CREATE TABLE public.pessoa (
+	empresa int2 NOT NULL,
+	id int2 NOT NULL,
+	razaosocial varchar(60) NOT NULL,
+	cnpjcpf varchar(14) NOT NULL,
+	telefone varchar(20) NOT NULL,
+	email varchar(120) NOT NULL,
+	endereco varchar(120) NOT NULL,
+	cidade int2 NOT NULL,
+	status int2 NULL,
+  CONSTRAINT pessoa_pk PRIMARY KEY (empresa,id)
+);
+
