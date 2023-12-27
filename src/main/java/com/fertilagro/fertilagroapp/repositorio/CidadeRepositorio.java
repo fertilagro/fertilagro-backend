@@ -27,7 +27,7 @@ public class CidadeRepositorio extends SuperRepositorio<CidadeVO> {
 		createQuery.setParameter("empresa", 1);
 		 
 		try {	
-			return (List<CidadeVO>) createQuery.getSingleResult(); 
+			return (List<CidadeVO>) createQuery.getResultList(); 
 		}catch (NoResultException nre){
 			return null;
 		} 

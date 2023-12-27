@@ -1,5 +1,6 @@
 package com.fertilagro.fertilagroapp.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.annotation.PropertySource;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
+import com.fertilagro.fertilagroapp.dto.CidadeDTO;
+import com.fertilagro.fertilagroapp.dto.FkfieldDTO;
 import com.fertilagro.fertilagroapp.dto.SuperDTO;
+import com.fertilagro.fertilagroapp.entities.CidadeVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 import com.fertilagro.fertilagroapp.service.SuperService;
 
@@ -67,6 +71,27 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
         }
     }*/
     
+    @PostMapping("/buscarPorFkField")
+    public ResponseEntity<List<FkfieldDTO<T, C>>> buscarPorFkField(@RequestBody String dados) {
+        List<FkfieldDTO<T, C>> retorno = null;
+    	List<T> listaCrudVO = getSuperControler().buscarPorFkField(dados);
+        if (listaCrudVO != null) {
+            retorno = new ArrayList<>();
+            for (T crudVO : listaCrudVO) {
+               // C crudDTO = dtoClass.getConstructor().newInstance();
+            	 CidadeDTO crudDTO = new CidadeDTO();
+            	 CidadeVO crud = new CidadeVO();
+            	 crud = (CidadeVO) crudVO;
+                
+                crudDTO.convertVOparaDTO(crud, crudDTO);
+                
+              //  crudDTO.objetoParaDTO(crudVO, crudDTO, false, false);
+                retorno.add(new FkfieldDTO<T, C>((C) crudDTO));
+            }
+        }
 
+        return ResponseEntity.ok(retorno);
+    	
+    }
     
 }

@@ -15,9 +15,7 @@ public class EmpresaPadraoIdPKDTO implements Serializable {
 
     private Integer empresa;
     private Integer id;
-    
-    
-    
+      
     public EmpresaPadraoIdPKDTO(EmpresaPadraoIdPK empresaPadraoIdPK) {
     	this.empresa = empresaPadraoIdPK.getEmpresa();
     	this.id = empresaPadraoIdPK.getId();

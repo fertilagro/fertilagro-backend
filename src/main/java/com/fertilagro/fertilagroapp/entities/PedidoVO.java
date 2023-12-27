@@ -45,6 +45,12 @@ public class PedidoVO extends SuperVO {
 		}
 		return null;
 	}
+
+	@Override
+	public String getLabelFkfield() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 //	private List<PedidoAmostraVO> pedidoAmostras;

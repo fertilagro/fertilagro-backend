@@ -39,4 +39,10 @@ public class PedidoAmostraVO extends SuperVO {
 		return null;
 	}
 
+	@Override
+	public String getLabelFkfield() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

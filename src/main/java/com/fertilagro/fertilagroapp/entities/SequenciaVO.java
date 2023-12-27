@@ -38,4 +38,9 @@ public class SequenciaVO extends SuperVO {
 	public Object getSuperId() {
 		return null;
 	}
+	@Override
+	public String getLabelFkfield() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

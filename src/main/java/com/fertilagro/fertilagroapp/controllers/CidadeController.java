@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fertilagro.fertilagroapp.dto.CidadeDTO;
+import com.fertilagro.fertilagroapp.dto.FkfieldDTO;
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
 import com.fertilagro.fertilagroapp.service.CidadeService;
 import com.fertilagro.fertilagroapp.service.SuperService;
@@ -37,14 +36,23 @@ public class CidadeController extends SuperController<CidadeVO, CidadeDTO> imple
 		return cidadeService;
 	}
 	
-    @PostMapping("/buscarPorFkField")
-    public ResponseEntity<List<CidadeDTO>> buscarPorFkField(@RequestBody String dados, Pageable pageable) {
+  /*  @PostMapping("/buscarPorFkField")
+    public ResponseEntity<List<FkfieldDTO<CidadeVO, CidadeDTO>>> buscarPorFkField(@RequestBody String dados) {
     	List<CidadeVO> cidades = cidadeService.buscarPorFkField(dados); 	
     	List<CidadeDTO> cidadesDTO = new ArrayList<CidadeDTO>();	
+    	CidadeDTO DTO = new CidadeDTO();
     	
-    	BeanUtils.copyProperties(cidades, cidadesDTO);
-    	return new ResponseEntity<>(cidadesDTO, HttpStatus.OK);
-    }
+        ArrayList<FkfieldDTO<CidadeVO, CidadeDTO>> retorno = new ArrayList<FkfieldDTO<CidadeVO, CidadeDTO>>();
+    	retorno = new FkfieldDTO<CidadeVO, CidadeDTO>();
+        
+    	try {
+        	DTO.convertListVOparaDTO(cidades, cidadesDTO);
+            retorno.add(new FkfieldDTO<CidadeVO, CidadeDTO>((CidadeDTO) cidadesDTO));
+            
+        //    retorno.add(new FkfieldDTO<T, C>((C) crudDTO));
+		} catch (Exception e) {}
+    	return new ResponseEntity<>(retorno, HttpStatus.OK);
+    }*/
     
 }
 

@@ -10,6 +10,8 @@ import lombok.Setter;
 public abstract class SuperVO {
 	
     public abstract void setGerarIdentificadorId(Integer id);
+    
+    public abstract String getLabelFkfield();
 
     public abstract Object getSuperId();
     

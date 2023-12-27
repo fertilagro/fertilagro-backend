@@ -8,11 +8,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
+import com.fertilagro.fertilagroapp.entities.CidadeVO;
 import com.fertilagro.fertilagroapp.entities.SequenciaVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 import com.fertilagro.fertilagroapp.pk.SequenciaPK;
 import com.fertilagro.fertilagroapp.repositorio.SuperRepositorio;
+import com.fertilagro.fertilagroapp.util.uteis;
 
 public abstract class SuperService<T extends SuperVO> {
 	
@@ -78,5 +80,16 @@ public abstract class SuperService<T extends SuperVO> {
 			} catch (Exception e) {e.printStackTrace();}
 		}
 		return null;
+    }
+    
+    public List<T> buscarPorFkField(String dados) {
+    	List<T> lista = null;
+    	if (uteis.ContemSomenteNumero(dados)) {
+    		 Integer id = Integer.parseInt(dados);
+    		// lista = cidadeRepositorio.encontrarPorId(id);
+    	} else {
+    		 lista = getRepositorio().encontrarPorAtributoPersonalizado(dados);
+    	}
+    	return lista;
     }
 }
