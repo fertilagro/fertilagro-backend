@@ -1,11 +1,11 @@
 package com.fertilagro.fertilagroapp.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,13 +73,23 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
     
     @SuppressWarnings("unchecked")
 	@PostMapping("/buscarPorFkField")
-    public ResponseEntity<List<FkfieldDTO<T, C>>> buscarPorFkField(@RequestBody String dados) {
+    public ResponseEntity<List<FkfieldDTO<T, C>>> buscarPorFkField(@RequestBody HashMap<String, Object> param) {
         List<FkfieldDTO<T, C>> retorno = null;
-    	List<T> listaCrudVO = getSuperControler().buscarPorFkField(dados);
+    	Object tipo = param.get("tipo");
+    	Object dados = param.get("value");
+    	
+    	if (tipo.equals("cidades")) {
+    		retorno = buscarPorFkFieldCidade(dados);
+    	}
+        return ResponseEntity.ok(retorno);
+    }
+    
+    public List<FkfieldDTO<T, C>> buscarPorFkFieldCidade(Object dados) {
+        List<FkfieldDTO<T, C>> retorno = null;
+    	List<T> listaCrudVO = getSuperControler().buscarPorFkFieldCidade(dados);
         if (listaCrudVO != null) {
             retorno = new ArrayList<>();
             for (T crudVO : listaCrudVO) {
-               // C crudDTO = dtoClass.getConstructor().newInstance();
             	 CidadeDTO crudDTO = new CidadeDTO();
             	 CidadeVO crud = new CidadeVO();
             	 crud = (CidadeVO) crudVO;
@@ -88,9 +98,31 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
                 retorno.add(new FkfieldDTO<T, C>((C) crudDTO));
             }
         }
-
-        return ResponseEntity.ok(retorno);
+        return retorno;
+    }
+    
+	@PostMapping("/buscarPorChave")
+    public ResponseEntity<FkfieldDTO<T, C>> buscarPorChave(@RequestBody HashMap<String, Object> param) {
+        FkfieldDTO<T, C> retorno = null;
+    	Object tipo = param.get("tipo");
+    	Object dados = param.get("value");
     	
+    	if (tipo.equals("cidades")) {
+    		retorno = buscarPorChaveCidade(dados);
+    	}
+        return ResponseEntity.ok(retorno);
+    }
+	
+    @SuppressWarnings("unchecked")
+	public FkfieldDTO<T, C> buscarPorChaveCidade(Object dados) {
+		FkfieldDTO<T, C> retorno = null;
+		CidadeVO crud = getSuperControler().buscarPorChaveCidade(dados);
+		CidadeDTO crudDTO = new CidadeDTO();
+
+		crudDTO.convertVOparaDTOCidade(crud, crudDTO);
+		retorno = new FkfieldDTO<T, C>((C) crudDTO);
+
+		return retorno;
     }
     
 }

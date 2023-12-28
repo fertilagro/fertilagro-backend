@@ -14,7 +14,6 @@ import com.fertilagro.fertilagroapp.entities.SuperVO;
 import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 import com.fertilagro.fertilagroapp.pk.SequenciaPK;
 import com.fertilagro.fertilagroapp.repositorio.SuperRepositorio;
-import com.fertilagro.fertilagroapp.util.uteis;
 
 public abstract class SuperService<T extends SuperVO> {
 	
@@ -82,14 +81,13 @@ public abstract class SuperService<T extends SuperVO> {
 		return null;
     }
     
-    public List<T> buscarPorFkField(String dados) {
+    public List<T> buscarPorFkFieldCidade(Object dados) {
     	List<T> lista = null;
-    	if (uteis.ContemSomenteNumero(dados)) {
-    		 Integer id = Integer.parseInt(dados);
-    		// lista = cidadeRepositorio.encontrarPorId(id);
-    	} else {
-    		 lista = getRepositorio().encontrarPorAtributoPersonalizado(dados);
-    	}
+    	lista = getRepositorio().buscaCidadePorNome((String) dados);
     	return lista;
+    }
+    
+    public CidadeVO buscarPorChaveCidade(Object dados) {
+    	return getRepositorio().buscarPorChaveCidade((Integer) dados);
     }
 }

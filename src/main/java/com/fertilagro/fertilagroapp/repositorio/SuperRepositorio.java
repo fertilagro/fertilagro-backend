@@ -33,21 +33,39 @@ public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositori
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T> encontrarPorAtributoPersonalizado(String nome) {
+	public List<T> buscaCidadePorNome(String nome) {
 		StringBuilder sb = new StringBuilder();
-		
 		sb.append(" SELECT s ");
 		sb.append(" FROM ").append(CidadeVO.class.getSimpleName()).append(" s ");
 		sb.append(" WHERE ");
 		sb.append("     s.id.empresa = :empresa ");
 		sb.append(" AND s.nome like '%").append(nome).append("%' ");
 		
-		
 		Query createQuery = getSession().createQuery(sb.toString());
 		createQuery.setParameter("empresa", 1);
 		 
 		try {	
 			return (List<T>) createQuery.getResultList(); 
+		}catch (NoResultException nre){
+			return null;
+		} 
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public CidadeVO buscarPorChaveCidade(Integer id) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(" SELECT s ");
+		sb.append(" FROM ").append(CidadeVO.class.getSimpleName()).append(" s ");
+		sb.append(" WHERE ");
+		sb.append("     s.id.empresa = :empresa ");
+		sb.append(" AND s.id.id = :id ");
+		
+		Query createQuery = getSession().createQuery(sb.toString());
+		createQuery.setParameter("empresa", 1);
+		createQuery.setParameter("id", id);
+		 
+		try {	
+			return  (CidadeVO) createQuery.getSingleResult(); 
 		}catch (NoResultException nre){
 			return null;
 		} 
