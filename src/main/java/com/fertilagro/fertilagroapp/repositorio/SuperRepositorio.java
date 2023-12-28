@@ -52,7 +52,7 @@ public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositori
 	}	
 	
 	@SuppressWarnings("unchecked")
-	public CidadeVO buscarPorChaveCidade(Integer id) {
+	public List<T> buscarPorChaveCidade(Integer id) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" SELECT s ");
 		sb.append(" FROM ").append(CidadeVO.class.getSimpleName()).append(" s ");
@@ -65,7 +65,7 @@ public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositori
 		createQuery.setParameter("id", id);
 		 
 		try {	
-			return  (CidadeVO) createQuery.getSingleResult(); 
+			return (List<T>) createQuery.getResultList(); 
 		}catch (NoResultException nre){
 			return null;
 		} 
