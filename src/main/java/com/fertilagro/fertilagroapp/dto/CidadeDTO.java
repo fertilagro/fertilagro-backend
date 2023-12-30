@@ -23,7 +23,7 @@ public class CidadeDTO extends SuperDTO<CidadeVO> {
 		super();
 	}
 	
-	public CidadeDTO convertVOparaDTO(CidadeVO cidade) {
+	/*public CidadeDTO convertVOparaDTO(CidadeVO cidade) {
 		CidadeDTO cidadeDTO = new CidadeDTO();
 		
 		EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
@@ -53,7 +53,7 @@ public class CidadeDTO extends SuperDTO<CidadeVO> {
 		}
 		
 		listDTO.addAll(cidadesDTO);
-	}
+	}*/
 	
 	public String getLabelFkfield() {
 		return labelFkfield;

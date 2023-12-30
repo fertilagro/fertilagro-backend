@@ -1,27 +1,26 @@
 package com.fertilagro.fertilagroapp.entities;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Table(name = "pedido")
 public class PedidoVO extends SuperVO {
 
@@ -31,6 +30,14 @@ public class PedidoVO extends SuperVO {
 	@Column(name="DATA")
 	private LocalDate data;
 
+	@ManyToOne
+	@JoinColumns(value = {
+			@JoinColumn(name = "empresa", referencedColumnName = "empresa", insertable = false, updatable = false),
+			@JoinColumn(name = "pessoa", referencedColumnName = "id", insertable = false, updatable = false)})
+	private PessoaVO pessoa;
+	@Column(name="PESSOA")
+	private Integer pessoaId;
+	
 	@Override
 	public void setGerarIdentificadorId(Integer id) {
         if (this.id != null) {
@@ -48,12 +55,7 @@ public class PedidoVO extends SuperVO {
 
 	@Override
 	public String getLabelFkfield() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.id != null ? this.id.getId().toString() : null;
 	}
-	
-	
-//	private List<PedidoAmostraVO> pedidoAmostras;
-	
 	
 }

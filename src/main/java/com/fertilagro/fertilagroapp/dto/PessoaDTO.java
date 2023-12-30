@@ -5,7 +5,6 @@ import com.fertilagro.fertilagroapp.entities.PessoaVO;
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +13,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class PessoaDTO extends SuperDTO<PessoaVO> {
 	
 	private Integer id;
@@ -23,7 +21,7 @@ public class PessoaDTO extends SuperDTO<PessoaVO> {
     private String telefone;
     private String email;
     private String endereco;
-    private String cidade;
+    private CidadeDTO cidade;
 	private StatusEnum status;
 
 }

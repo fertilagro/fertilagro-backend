@@ -1,19 +1,16 @@
 package com.fertilagro.fertilagroapp.entities;
 
 import com.fertilagro.fertilagroapp.anotacao.TabelaFilha;
+import com.fertilagro.fertilagroapp.pk.EmpresaPedidoAmostraPK;
 
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@EqualsAndHashCode
 @Table(name = "PEDIDOAMOSTRA")
 @TabelaFilha(pai = PedidoVO.class)
 @AllArgsConstructor
@@ -21,14 +18,14 @@ import lombok.Setter;
 @Setter
 public class PedidoAmostraVO extends SuperVO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@EmbeddedId
+	private EmpresaPedidoAmostraPK id;
 
 	@Override
 	public void setGerarIdentificadorId(Integer id) {
-		// TODO Auto-generated method stub
-		
+        if (this.id != null) {
+            this.id.setId(id);
+        }
 	}
 
 	@Override
