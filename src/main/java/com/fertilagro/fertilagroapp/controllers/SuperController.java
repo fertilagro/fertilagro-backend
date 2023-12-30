@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
 import com.fertilagro.fertilagroapp.dto.CidadeDTO;
 import com.fertilagro.fertilagroapp.dto.FkfieldDTO;
@@ -71,7 +72,6 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
         }
     }*/
     
-    @SuppressWarnings("unchecked")
 	@PostMapping("/buscarPorFkField")
     public ResponseEntity<List<FkfieldDTO<T, C>>> buscarPorFkField(@RequestBody HashMap<String, Object> param) {
         List<FkfieldDTO<T, C>> retorno = null;
@@ -84,7 +84,8 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
         return ResponseEntity.ok(retorno);
     }
     
-    public List<FkfieldDTO<T, C>> buscarPorFkFieldCidade(Object dados) {
+    @SuppressWarnings("unchecked")
+	public List<FkfieldDTO<T, C>> buscarPorFkFieldCidade(Object dados) {
         List<FkfieldDTO<T, C>> retorno = null;
     	List<T> listaCrudVO = getSuperControler().buscarPorFkFieldCidade(dados);
         if (listaCrudVO != null) {
@@ -102,8 +103,8 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
     }
     
 	@PostMapping("/buscarPorChave")
-    public ResponseEntity<FkfieldDTO<T, C>> buscarPorChave(@RequestBody HashMap<String, Object> param) {
-        FkfieldDTO<T, C> retorno = null;
+    public ResponseEntity<List<FkfieldDTO<T, C>>> buscarPorChave(@RequestBody HashMap<String, Object> param) {
+		List<FkfieldDTO<T, C>> retorno = null;
     	Object tipo = param.get("tipo");
     	Object dados = param.get("value");
     	
@@ -113,15 +114,23 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
         return ResponseEntity.ok(retorno);
     }
 	
-    @SuppressWarnings("unchecked")
-	public FkfieldDTO<T, C> buscarPorChaveCidade(Object dados) {
-		FkfieldDTO<T, C> retorno = null;
-		CidadeVO crud = getSuperControler().buscarPorChaveCidade(dados);
+    @SuppressWarnings({ "unchecked", "null" })
+	public List<FkfieldDTO<T, C>> buscarPorChaveCidade(Object dados) {
+        List<FkfieldDTO<T, C>> retorno = null;
+        
+		ObjectMapper mapper = new ObjectMapper();	
+		Integer valor = mapper.convertValue(dados, Integer.class);
+		
+		List<T> listaCrudVO = getSuperControler().buscarPorChaveCidade(valor);
 		CidadeDTO crudDTO = new CidadeDTO();
-
-		crudDTO.convertVOparaDTOCidade(crud, crudDTO);
-		retorno = new FkfieldDTO<T, C>((C) crudDTO);
-
+        retorno = new ArrayList<>();
+        for (T crudVO : listaCrudVO) {
+       	    CidadeVO crud = new CidadeVO();
+        	crud = (CidadeVO) crudVO;
+        	crudDTO.convertVOparaDTOCidade(crud, crudDTO);
+        	retorno.add(new FkfieldDTO<T, C>((C) crudDTO));
+        }
+		
 		return retorno;
     }
     

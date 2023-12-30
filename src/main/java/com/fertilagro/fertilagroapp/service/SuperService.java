@@ -87,7 +87,7 @@ public abstract class SuperService<T extends SuperVO> {
     	return lista;
     }
     
-    public CidadeVO buscarPorChaveCidade(Object dados) {
-    	return getRepositorio().buscarPorChaveCidade((Integer) dados);
+    public List<T> buscarPorChaveCidade(Integer valor) {
+    	return getRepositorio().buscarPorChaveCidade(valor);
     }
 }
