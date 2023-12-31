@@ -2,6 +2,7 @@ package com.fertilagro.fertilagroapp.controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -19,18 +20,19 @@ import com.fertilagro.fertilagroapp.dto.SuperDTO;
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 import com.fertilagro.fertilagroapp.service.SuperService;
+import com.fertilagro.fertilagroapp.util.uteis;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> {
 
-    protected abstract SuperService<T> getSuperControler();
+    protected abstract SuperService<T> getSuperService();
     
     protected Class<T> voClass;
     protected Class<C> dtoClass;
 
     @GetMapping
     public List<T> listarTodos() {
-        return getSuperControler().listarTodos();
+        return getSuperService().listarTodos();
     }
 
     /*@GetMapping("/{id}")
@@ -44,7 +46,7 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
         T novaEntidade = null;
         try {
             EntityUteis.setIdCrud(entity, 1, entity.getSuperId());
-            novaEntidade = getSuperControler().insere(entity);
+            novaEntidade = getSuperService().insere(entity);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -87,7 +89,7 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
     @SuppressWarnings("unchecked")
 	public List<FkfieldDTO<T, C>> buscarPorFkFieldCidade(Object dados) {
         List<FkfieldDTO<T, C>> retorno = null;
-    	List<T> listaCrudVO = getSuperControler().buscarPorFkFieldCidade(dados);
+    	List<T> listaCrudVO = getSuperService().buscarPorFkFieldCidade(dados);
         if (listaCrudVO != null) {
             retorno = new ArrayList<>();
             for (T crudVO : listaCrudVO) {
@@ -107,21 +109,20 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
 		List<FkfieldDTO<T, C>> retorno = null;
     	Object tipo = param.get("tipo");
     	Object dados = param.get("value");
-    	
+
     	if (tipo.equals("cidades")) {
     		retorno = buscarPorChaveCidade(dados);
     	}
         return ResponseEntity.ok(retorno);
     }
 	
-    @SuppressWarnings({ "unchecked", "null" })
 	public List<FkfieldDTO<T, C>> buscarPorChaveCidade(Object dados) {
         List<FkfieldDTO<T, C>> retorno = null;
         
 		ObjectMapper mapper = new ObjectMapper();	
 		Integer valor = mapper.convertValue(dados, Integer.class);
 		
-		List<T> listaCrudVO = getSuperControler().buscarPorChaveCidade(valor);
+		List<T> listaCrudVO = getSuperService().buscarPorChaveCidade(valor);
 		CidadeDTO crudDTO = new CidadeDTO();
         retorno = new ArrayList<>();
         for (T crudVO : listaCrudVO) {
@@ -132,6 +133,33 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
         }
 		
 		return retorno;
+    }
+
+	@PostMapping("/buscarPorId")
+    public ResponseEntity<T> buscarPorId(@RequestBody HashMap<String, Object> param) {
+		ObjectMapper mapper = uteis.getObjectMapper(); 
+		String tipo = mapper.convertValue(param.get("tipo"), String.class);
+				
+		LinkedHashMap<String, Integer> linkedHashMap = new LinkedHashMap<>();
+		linkedHashMap = (LinkedHashMap<String, Integer>) mapper.convertValue(param.get("value"), Object.class);
+		
+		Integer empresa = 1;//linkedHashMap.get("empresa");
+		Integer id = 1;//linkedHashMap.get("id");
+
+
+		T retorno = null;
+    	//Object tipo = param.get("tipo");
+    	//Object dados = param.get("value");
+    	//Object resource = param.get("resource");
+    	
+    	
+    	if (tipo.equals("cidades")) {
+    	//	retorno = buscarPorChaveCidade(dados);
+    	}
+    	if (tipo.equals("pedidos")) {
+    		retorno = getSuperService().buscarPorId(empresa, id, tipo);
+    	}
+        return ResponseEntity.ok(retorno);
     }
     
 }

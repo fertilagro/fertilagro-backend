@@ -1,15 +1,20 @@
 package com.fertilagro.fertilagroapp.entities;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import org.hibernate.annotations.Where;
 
 import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,6 +42,9 @@ public class PedidoVO extends SuperVO {
 	private PessoaVO pessoa;
 	@Column(name="PESSOA")
 	private Integer pessoaId;
+	
+	@OneToMany(mappedBy = "pedido", cascade=CascadeType.ALL)
+	private List<PedidoAmostraVO> pedidoAmostras;
 	
 	@Override
 	public void setGerarIdentificadorId(Integer id) {

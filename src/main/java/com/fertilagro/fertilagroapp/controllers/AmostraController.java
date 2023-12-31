@@ -19,8 +19,9 @@ public class AmostraController extends SuperController<AmostraVO , AmostraDTO>{
 	public AmostraController(AmostraService amostraService) {
 		this.amostraService = amostraService;
 	}
+
 	@Override
-	protected SuperService<AmostraVO> getSuperControler() {
+	protected SuperService<AmostraVO> getSuperService() {
 		return amostraService;
 	}
 

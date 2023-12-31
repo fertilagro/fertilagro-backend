@@ -32,7 +32,7 @@ public class CidadeController extends SuperController<CidadeVO, CidadeDTO> imple
 	}
 	
 	@Override
-	protected SuperService<CidadeVO> getSuperControler() {
+	protected SuperService<CidadeVO> getSuperService() {
 		return cidadeService;
 	}
 	

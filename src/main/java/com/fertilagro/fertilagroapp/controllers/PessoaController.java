@@ -23,13 +23,9 @@ public class PessoaController extends SuperController<PessoaVO, PessoaDTO> imple
 	public PessoaController(PessoaService pessoaService) {
 		this.pessoaService = pessoaService;
 	}
-	
+
 	@Override
-	protected SuperService<PessoaVO> getSuperControler() {
+	protected SuperService<PessoaVO> getSuperService() {
 		return pessoaService;
 	}
-
-
-	
-	
 }

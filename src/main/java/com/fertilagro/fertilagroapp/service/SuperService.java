@@ -90,4 +90,8 @@ public abstract class SuperService<T extends SuperVO> {
     public List<T> buscarPorChaveCidade(Integer valor) {
     	return getRepositorio().buscarPorChaveCidade(valor);
     }
+    
+    public T buscarPorId(Integer empresa, Integer id, String tipo) {
+    	return getRepositorio().buscarPorId(empresa, id, tipo);
+    }
 }

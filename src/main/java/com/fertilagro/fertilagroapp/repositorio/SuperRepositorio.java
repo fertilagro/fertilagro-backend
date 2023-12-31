@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fertilagro.fertilagroapp.arquitetura.BaseRepositorio;
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
+import com.fertilagro.fertilagroapp.entities.PedidoVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 
 import jakarta.persistence.NoResultException;
@@ -69,6 +70,33 @@ public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositori
 		}catch (NoResultException nre){
 			return null;
 		} 
+	}	
+	
+	public T buscarPorId(Integer empresa, Integer id, String tipo) {
+		StringBuilder sb = new StringBuilder();
+		T retorno = null;
+		sb.append(" SELECT s ");
+		if (tipo.equals("pedidos")) {			
+			sb.append(" FROM ").append(PedidoVO.class.getSimpleName()).append(" s ");
+		} else {
+			
+		}
+		
+		sb.append(" WHERE ");
+		sb.append("     s.id.empresa = :empresa ");
+		sb.append(" AND s.id.id = :id ");
+		
+		Query createQuery = getSession().createQuery(sb.toString());
+		createQuery.setParameter("empresa", empresa);
+		createQuery.setParameter("id", id);
+		 
+		try {	
+			retorno = (T) createQuery.getSingleResult();
+		}catch (NoResultException nre){
+			retorno = null;
+		} 
+		
+		return retorno;
 	}	
 	
 }
