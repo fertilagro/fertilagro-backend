@@ -3,8 +3,7 @@ package com.fertilagro.fertilagroapp.entities;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.hibernate.annotations.Where;
-
+import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
 import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 
 import jakarta.persistence.CascadeType;
@@ -43,6 +42,9 @@ public class PedidoVO extends SuperVO {
 	@Column(name="PESSOA")
 	private Integer pessoaId;
 	
+    @Column(name = "STATUS")
+	private StatusEnum status;
+	
 	@OneToMany(mappedBy = "pedido", cascade=CascadeType.ALL)
 	private List<PedidoAmostraVO> pedidoAmostras;
 	
@@ -64,6 +66,13 @@ public class PedidoVO extends SuperVO {
 	@Override
 	public String getLabelFkfield() {
 		return this.id != null ? this.id.getId().toString() : null;
+	}
+	
+	public void setPessoa(PessoaVO pessoa) {
+		this.pessoa = pessoa;
+		if (pessoa != null) {
+			setPessoaId(pessoa.getId().getId());
+		}
 	}
 	
 }

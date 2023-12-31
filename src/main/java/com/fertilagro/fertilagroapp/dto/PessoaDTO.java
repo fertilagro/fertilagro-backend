@@ -1,6 +1,7 @@
 package com.fertilagro.fertilagroapp.dto;
 
 
+import com.fertilagro.fertilagroapp.dto.pk.EmpresaPadraoIdPKDTO;
 import com.fertilagro.fertilagroapp.entities.PessoaVO;
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
 
@@ -15,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PessoaDTO extends SuperDTO<PessoaVO> {
 	
-	private Integer id;
+	private EmpresaPadraoIdPKDTO id;
 	private String razaoSocial;
     private String cnpjCpf;
     private String telefone;

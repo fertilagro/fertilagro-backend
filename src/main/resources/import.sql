@@ -28,3 +28,41 @@ CREATE TABLE public.pessoa (
   CONSTRAINT pessoa_pk PRIMARY KEY (empresa,id)
 );
 
+CREATE TABLE public.pedido (
+	empresa int2 NOT NULL,
+	id int2 NOT NULL,
+	"data" date NOT NULL,
+	pessoa int4 NOT NULL,
+	status int2 NULL,
+	CONSTRAINT pedido_pk PRIMARY KEY (empresa, id)
+);
+
+CREATE TABLE public.pedidoamostra (
+	empresa int2 NOT NULL,
+	pedido int2 NOT NULL,
+	id int2 NOT NULL,
+	amostra int4 NULL,
+	CONSTRAINT pedidoamostra_pk PRIMARY KEY (empresa, pedido, id),
+	CONSTRAINT fk_pedidoamostra_pedido FOREIGN KEY (pedido,empresa) REFERENCES <?>() ON UPDATE CASCADE
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

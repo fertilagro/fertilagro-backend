@@ -16,8 +16,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
 import com.fertilagro.fertilagroapp.dto.CidadeDTO;
 import com.fertilagro.fertilagroapp.dto.FkfieldDTO;
+import com.fertilagro.fertilagroapp.dto.PedidoDTO;
 import com.fertilagro.fertilagroapp.dto.SuperDTO;
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
+import com.fertilagro.fertilagroapp.entities.PedidoVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 import com.fertilagro.fertilagroapp.service.SuperService;
 import com.fertilagro.fertilagroapp.util.uteis;
@@ -135,31 +137,22 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
 		return retorno;
     }
 
-	@PostMapping("/buscarPorId")
-    public ResponseEntity<T> buscarPorId(@RequestBody HashMap<String, Object> param) {
-		ObjectMapper mapper = uteis.getObjectMapper(); 
+	@SuppressWarnings("unchecked")
+	@PostMapping("/buscarPorIdPedido")
+    public ResponseEntity<PedidoDTO> buscarPorIdPedido(@RequestBody HashMap<String, Object> param) {
+		ObjectMapper mapper = uteis.getObjectMapper();
 		String tipo = mapper.convertValue(param.get("tipo"), String.class);
-				
-		LinkedHashMap<String, Integer> linkedHashMap = new LinkedHashMap<>();
-		linkedHashMap = (LinkedHashMap<String, Integer>) mapper.convertValue(param.get("value"), Object.class);
+		Object value = mapper.convertValue(param.get("value"), Object.class);
 		
-		Integer empresa = 1;//linkedHashMap.get("empresa");
-		Integer id = 1;//linkedHashMap.get("id");
-
-
-		T retorno = null;
-    	//Object tipo = param.get("tipo");
-    	//Object dados = param.get("value");
-    	//Object resource = param.get("resource");
-    	
-    	
-    	if (tipo.equals("cidades")) {
-    	//	retorno = buscarPorChaveCidade(dados);
-    	}
-    	if (tipo.equals("pedidos")) {
-    		retorno = getSuperService().buscarPorId(empresa, id, tipo);
-    	}
-        return ResponseEntity.ok(retorno);
+		LinkedHashMap<String, Integer> linkedHashMap = (LinkedHashMap<String, Integer>) value;
+		Integer empresa = linkedHashMap.get("empresa");
+		Integer id = linkedHashMap.get("id");
+		
+		PedidoDTO crudDTO = new PedidoDTO();
+		PedidoVO crud = (PedidoVO) getSuperService().buscarPorId(empresa, id, tipo);
+		crudDTO.convertVOparaDTOPedido(crud, crudDTO);
+		
+		return ResponseEntity.ok(crudDTO);
     }
     
 }
