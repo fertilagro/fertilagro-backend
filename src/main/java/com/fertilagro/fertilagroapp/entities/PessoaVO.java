@@ -6,6 +6,7 @@ import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
@@ -41,7 +42,7 @@ public class PessoaVO extends SuperVO {
     @Column(name="ENDERECO")
     private String endereco;
     
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns(value = {
 			@JoinColumn(name = "empresa", referencedColumnName = "empresa", insertable = false, updatable = false),
 			@JoinColumn(name = "cidade", referencedColumnName = "id", insertable = false, updatable = false)})

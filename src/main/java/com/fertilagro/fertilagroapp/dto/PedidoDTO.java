@@ -25,6 +25,6 @@ public class PedidoDTO extends SuperDTO<PedidoVO> {
 	private PessoaDTO pessoa;
 	private StatusEnum status;
 	
-	//private List<PedidoAmostraDTO> pedidoAmostras;
+	private List<PedidoAmostraDTO> pedidoAmostras;
 
 }

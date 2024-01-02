@@ -1,5 +1,8 @@
 package com.fertilagro.fertilagroapp.entities;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.fertilagro.fertilagroapp.anotacao.TabelaFilha;
 import com.fertilagro.fertilagroapp.pk.EmpresaPedidoAmostraPK;
 
@@ -11,14 +14,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "PEDIDOAMOSTRA")
 @TabelaFilha(pai = PedidoVO.class)
-@AllArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 @Getter
 @Setter
 public class PedidoAmostraVO extends SuperVO{

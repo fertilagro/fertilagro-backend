@@ -12,8 +12,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,14 +36,15 @@ public class AmostraVO extends SuperVO {
 	@Column(name = "PROPRIEDADE")
 	private String propriedade;
 	
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CLIENTE", referencedColumnName = "ID", insertable = false, updatable = false,
-			foreignKey = @ForeignKey(name = "cliente"),nullable = true) 
-	private PessoaVO cliente;*/
-	
-	@Column(name = "CLIENTE")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns(value = {
+			@JoinColumn(name = "empresa", referencedColumnName = "empresa", insertable = false, updatable = false),
+			@JoinColumn(name = "cliente", referencedColumnName = "id", insertable = false, updatable = false)})
+	private PessoaVO cliente;
+	@Column(name="CLIENTE")
 	private Integer clienteId;
 
+	@Column(name = "SOLICITANTE")
 	private String solicitante;
 	
 	@Column(name = "ENTRADA")
@@ -59,23 +62,19 @@ public class AmostraVO extends SuperVO {
 	
 	@Column(name = "TIPO_ANALISE")
 	private AmostraEnum tipoAnalise;
-	
-    @Column(name = "NUMERO_PEDIDO")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long numeroPedido;
 
 	@Column(name = "VALOR")
 	private BigDecimal valor;
 	
-	@Column(name = "OBSERVACAO", length = 500)
+	@Column(name = "OBSERVACAO", length = 800)
 	private String observacao;
 	
-	/*public void setCliente(PessoaVO pessoa) {
+	public void setCliente(PessoaVO pessoa) {
 		this.cliente = pessoa;
 		if(pessoa != null) {
-			setClienteId(pessoa.getId());
+			setClienteId(pessoa.getId().getId());
 		}
-	}*/
+	}
 
 	@Override
 	public void setGerarIdentificadorId(Integer id) {
@@ -94,7 +93,6 @@ public class AmostraVO extends SuperVO {
 
 	@Override
 	public String getLabelFkfield() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.id != null ? this.id.getId().toString()+ " - Cliente: "+this.getCliente().getRazaoSocial() : null;
 	}
 }
