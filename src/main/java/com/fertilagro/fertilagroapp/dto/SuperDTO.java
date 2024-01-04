@@ -85,7 +85,7 @@ public abstract class SuperDTO<T extends SuperVO> {
 			
 			PedidoAmostraDTO pedidoAm = new PedidoAmostraDTO();
 			pedidoAm.setId(id);
-			
+			pedidoAm.setLabelFkfield(listaVO.getLabelFkfield());
 			
 			
 		/*	private EmpresaPedidoAmostraPKDTO id;
