@@ -78,10 +78,11 @@ public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositori
 		sb.append(" SELECT s ");
 		if (tipo.equals("pedidos")) {			
 			sb.append(" FROM ").append(PedidoVO.class.getSimpleName()).append(" s ");
+		} else if (tipo.equals("cidades")) {
+			sb.append(" FROM ").append(CidadeVO.class.getSimpleName()).append(" s ");
 		} else {
 			
 		}
-		
 		sb.append(" WHERE ");
 		sb.append("     s.id.empresa = :empresa ");
 		sb.append(" AND s.id.id = :id ");

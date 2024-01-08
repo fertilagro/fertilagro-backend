@@ -37,8 +37,12 @@ public abstract class SuperService<T extends SuperVO> {
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public T insere(T entity) {
-    	entity = geraSequencia(entity);
-    	entity = getRepositorio().insere(entity);
+    	if (getId(entity) == 0) {    		
+    		entity = geraSequencia(entity);
+    		entity = getRepositorio().insere(entity);
+    	} else {
+    		entity = getRepositorio().altera(entity);
+    	}
         return entity;
     }
 
@@ -50,15 +54,16 @@ public abstract class SuperService<T extends SuperVO> {
       // repository.deleteById(id);
     } 
     
-    public T geraSequencia(T entity)  {
-    	SequenciaPK sequenciaPK = new SequenciaPK();
-    	Integer empresa = getIdEmpresa(entity); 
-    	sequenciaPK.setEmpresa(empresa);
-    	String tabela = EntityUteis.getNomeTabelaEntidade(entity.getClass());
-    	sequenciaPK.setTabela(tabela);
-    	SequenciaVO sequenciaVO = getSequenciaService().gerarChave(sequenciaPK);
+    public T geraSequencia(T entity)  {	
+		SequenciaPK sequenciaPK = new SequenciaPK();
+		Integer empresa = getIdEmpresa(entity);
+		sequenciaPK.setEmpresa(empresa);
+		String tabela = EntityUteis.getNomeTabelaEntidade(entity.getClass());
+		sequenciaPK.setTabela(tabela);
+		SequenciaVO sequenciaVO = getSequenciaService().gerarChave(sequenciaPK);
 		entity.setGerarIdentificadorId(sequenciaVO.getId());
-    	return entity;
+
+		return entity;
     }
     
     private Integer getIdEmpresa(T entity) {
@@ -74,6 +79,25 @@ public abstract class SuperService<T extends SuperVO> {
 				// Obtém o valor do campo
 				id = (EmpresaPadraoIdPK) idField.get(entity);
 				return id.getEmpresa();
+				
+			} catch (Exception e) {e.printStackTrace();}
+		}
+		return null;
+    }
+    
+    private Integer getId(T entity) {
+		if (entity != null) {
+			try {
+				// Obtém os campos ID
+				Field idField = null;
+				idField = entity.getClass().getDeclaredField("id");
+				// Define o campo como acessível
+				idField.setAccessible(true);
+				
+				EmpresaPadraoIdPK id = null;
+				// Obtém o valor do campo
+				id = (EmpresaPadraoIdPK) idField.get(entity);
+				return id.getId();
 				
 			} catch (Exception e) {e.printStackTrace();}
 		}

@@ -154,5 +154,23 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
 		
 		return ResponseEntity.ok(crudDTO);
     }
+	
+	@SuppressWarnings("unchecked")
+	@PostMapping("/buscarPorIdCidade")
+    public ResponseEntity<CidadeDTO> buscarPorIdCidade(@RequestBody HashMap<String, Object> param) {
+		ObjectMapper mapper = uteis.getObjectMapper();
+		String tipo = mapper.convertValue(param.get("tipo"), String.class);
+		Object value = mapper.convertValue(param.get("value"), Object.class);
+		
+		LinkedHashMap<String, Integer> linkedHashMap = (LinkedHashMap<String, Integer>) value;
+		Integer empresa = linkedHashMap.get("empresa");
+		Integer id = linkedHashMap.get("id");
+		
+		CidadeDTO crudDTO = new CidadeDTO();
+		CidadeVO crud = (CidadeVO) getSuperService().buscarPorId(empresa, id, tipo);
+		crudDTO.convertVOparaDTOCidade(crud, crudDTO);
+		
+		return ResponseEntity.ok(crudDTO);
+    }
     
 }
