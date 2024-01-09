@@ -1,12 +1,8 @@
 package com.fertilagro.fertilagroapp.dto;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fertilagro.fertilagroapp.conversor.LocalDateAttributeConverter;
 import com.fertilagro.fertilagroapp.dto.pk.EmpresaPadraoIdPKDTO;
 import com.fertilagro.fertilagroapp.dto.pk.EmpresaPedidoAmostraPKDTO;
 import com.fertilagro.fertilagroapp.entities.AmostraVO;
@@ -15,20 +11,12 @@ import com.fertilagro.fertilagroapp.entities.PedidoAmostraVO;
 import com.fertilagro.fertilagroapp.entities.PedidoVO;
 import com.fertilagro.fertilagroapp.entities.PessoaVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
-import com.fertilagro.fertilagroapp.enumerador.AmostraEnum;
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
-import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
-import jakarta.persistence.ManyToOne;
 
 public abstract class SuperDTO<T extends SuperVO> {
 	
 	private String labelFkfield;
+	private Object dataKey;
 	
 	public SuperDTO() {
     	super();	
@@ -40,6 +28,14 @@ public abstract class SuperDTO<T extends SuperVO> {
 
 	public void setLabelFkfield(String labelFkfield) {
 		this.labelFkfield = labelFkfield;
+	}
+	
+	public Object getDataKey() {
+		return dataKey;
+	}
+
+	public void setDataKey(Object dataKey) {
+		this.dataKey = dataKey;
 	}
 
 	public CidadeDTO convertVOparaDTOCidade(CidadeVO cidade, CidadeDTO cidadeDTO) {
