@@ -17,5 +17,5 @@ public class PedidoAmostraDTO extends SuperDTO<PedidoAmostraVO> {
 	private EmpresaPedidoAmostraPKDTO id;
 	private PedidoDTO pedido;
 	private AmostraDTO amostra;
-	
+
 }

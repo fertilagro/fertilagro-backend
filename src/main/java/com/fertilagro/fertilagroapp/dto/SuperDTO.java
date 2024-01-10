@@ -79,16 +79,17 @@ public abstract class SuperDTO<T extends SuperVO> {
 			id.setPedido(listaVO.getId().getPedido());
 			id.setId(listaVO.getId().getId());
 			
-			PedidoAmostraDTO pedidoAm = new PedidoAmostraDTO();
-			pedidoAm.setId(id);
-			pedidoAm.setLabelFkfield(listaVO.getLabelFkfield());
+			PedidoAmostraDTO pedidoAmDTO = new PedidoAmostraDTO();
+			pedidoAmDTO.setId(id);
+			pedidoAmDTO.setLabelFkfield(listaVO.getLabelFkfield());
+			pedidoAmDTO.setDataKey(listaVO.getId().getEmpresa() + "|" + listaVO.getId().getPedido() + "|" + listaVO.getId().getId());
 			
 			
 		/*	private EmpresaPedidoAmostraPKDTO id;
 			private PedidoDTO pedido;
 			private AmostraDTO amostra;*/
 
-			pedidosDTO.add(pedidoAm);			
+			pedidosDTO.add(pedidoAmDTO);			
 		}
 		
 		
