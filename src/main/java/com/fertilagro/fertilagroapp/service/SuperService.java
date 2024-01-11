@@ -110,8 +110,18 @@ public abstract class SuperService<T extends SuperVO> {
     	return lista;
     }
     
+    public List<T> buscarPorFkFieldPessoa(Object dados) {
+    	List<T> lista = null;
+    	lista = getRepositorio().buscaPessoaPorNome((String) dados);
+    	return lista;
+    }
+    
     public List<T> buscarPorChaveCidade(Integer valor) {
     	return getRepositorio().buscarPorChaveCidade(valor);
+    }
+    
+    public List<T> buscarPorChavePessoa(Integer valor) {
+    	return getRepositorio().buscarPorChavePessoa(valor);
     }
     
     public T buscarPorId(Integer empresa, Integer id, String tipo) {

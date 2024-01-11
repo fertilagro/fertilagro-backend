@@ -114,7 +114,9 @@ public abstract class SuperDTO<T extends SuperVO> {
 		
 		CidadeDTO cidade = new CidadeDTO();
 		pessoaDTO.setCidade(convertVOparaDTOCidade(pessoa.getCidade(),cidade));
+		
 		pessoaDTO.setStatus(StatusEnum.ATIVO);
+		pessoaDTO.setDataKey(pessoa.getId().getEmpresa()+"|"+pessoa.getId().getId());
 	
 		return pessoaDTO;		
 	}

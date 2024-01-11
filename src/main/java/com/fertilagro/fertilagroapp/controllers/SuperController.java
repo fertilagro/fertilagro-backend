@@ -17,9 +17,11 @@ import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
 import com.fertilagro.fertilagroapp.dto.CidadeDTO;
 import com.fertilagro.fertilagroapp.dto.FkfieldDTO;
 import com.fertilagro.fertilagroapp.dto.PedidoDTO;
+import com.fertilagro.fertilagroapp.dto.PessoaDTO;
 import com.fertilagro.fertilagroapp.dto.SuperDTO;
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
 import com.fertilagro.fertilagroapp.entities.PedidoVO;
+import com.fertilagro.fertilagroapp.entities.PessoaVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 import com.fertilagro.fertilagroapp.service.SuperService;
 import com.fertilagro.fertilagroapp.util.uteis;
@@ -84,6 +86,8 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
     	
     	if (tipo.equals("cidades")) {
     		retorno = buscarPorFkFieldCidade(dados);
+    	} else if (tipo.equals("pessoas")) {
+    		retorno = buscarPorFkFieldPessoa(dados);
     	}
         return ResponseEntity.ok(retorno);
     }
@@ -106,6 +110,24 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
         return retorno;
     }
     
+    @SuppressWarnings("unchecked")
+	public List<FkfieldDTO<T, C>> buscarPorFkFieldPessoa(Object dados) {
+        List<FkfieldDTO<T, C>> retorno = null;
+    	List<T> listaCrudVO = getSuperService().buscarPorFkFieldPessoa(dados);
+        if (listaCrudVO != null) {
+            retorno = new ArrayList<>();
+            for (T crudVO : listaCrudVO) {
+            	 PessoaDTO crudDTO = new PessoaDTO();
+            	 PessoaVO crud = new PessoaVO();
+            	 crud = (PessoaVO) crudVO;
+                
+                crudDTO.convertVOparaDTOPessoa(crud, crudDTO);
+                retorno.add(new FkfieldDTO<T, C>((C) crudDTO));
+            }
+        }
+        return retorno;
+    }
+    
 	@PostMapping("/buscarPorChave")
     public ResponseEntity<List<FkfieldDTO<T, C>>> buscarPorChave(@RequestBody HashMap<String, Object> param) {
 		List<FkfieldDTO<T, C>> retorno = null;
@@ -114,13 +136,15 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
 
     	if (tipo.equals("cidades")) {
     		retorno = buscarPorChaveCidade(dados);
-    	}
+    	} else if (tipo.equals("pessoas")) {
+    		retorno = buscarPorChavePessoa(dados);
+    	} 
+    	
         return ResponseEntity.ok(retorno);
     }
 	
 	public List<FkfieldDTO<T, C>> buscarPorChaveCidade(Object dados) {
         List<FkfieldDTO<T, C>> retorno = null;
-        
 		ObjectMapper mapper = new ObjectMapper();	
 		Integer valor = mapper.convertValue(dados, Integer.class);
 		
@@ -133,9 +157,25 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
         	crudDTO.convertVOparaDTOCidade(crud, crudDTO);
         	retorno.add(new FkfieldDTO<T, C>((C) crudDTO));
         }
-		
 		return retorno;
     }
+	
+	public List<FkfieldDTO<T, C>> buscarPorChavePessoa(Object dados) {
+		List<FkfieldDTO<T, C>> retorno = null;
+		ObjectMapper mapper = new ObjectMapper();	
+		Integer valor = mapper.convertValue(dados, Integer.class);
+		
+		List<T> listaCrudVO = getSuperService().buscarPorChavePessoa(valor);
+		PessoaDTO crudDTO = new PessoaDTO();
+		retorno = new ArrayList<>();
+		for (T crudVO : listaCrudVO) {
+			PessoaVO crud = new PessoaVO();
+			crud = (PessoaVO) crudVO;
+			crudDTO.convertVOparaDTOPessoa(crud, crudDTO);
+			retorno.add(new FkfieldDTO<T, C>((C) crudDTO));
+		}
+		return retorno;
+	}
 
 	@SuppressWarnings("unchecked")
 	@PostMapping("/buscarPorIdPedido")

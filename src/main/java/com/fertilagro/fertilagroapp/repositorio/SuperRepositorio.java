@@ -5,6 +5,7 @@ import java.util.List;
 import com.fertilagro.fertilagroapp.arquitetura.BaseRepositorio;
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
 import com.fertilagro.fertilagroapp.entities.PedidoVO;
+import com.fertilagro.fertilagroapp.entities.PessoaVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
 
 import jakarta.persistence.NoResultException;
@@ -50,13 +51,52 @@ public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositori
 		}catch (NoResultException nre){
 			return null;
 		} 
-	}	
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> buscaPessoaPorNome(String nome) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(" SELECT s ");
+		sb.append(" FROM ").append(PessoaVO.class.getSimpleName()).append(" s ");
+		sb.append(" WHERE ");
+		sb.append("     s.id.empresa = :empresa ");
+		sb.append(" AND s.razaoSocial like '%").append(nome).append("%' ");
+		
+		Query createQuery = getSession().createQuery(sb.toString());
+		createQuery.setParameter("empresa", 1);
+		 
+		try {	
+			return (List<T>) createQuery.getResultList(); 
+		}catch (NoResultException nre){
+			return null;
+		} 
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<T> buscarPorChaveCidade(Integer id) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" SELECT s ");
 		sb.append(" FROM ").append(CidadeVO.class.getSimpleName()).append(" s ");
+		sb.append(" WHERE ");
+		sb.append("     s.id.empresa = :empresa ");
+		sb.append(" AND s.id.id = :id ");
+		
+		Query createQuery = getSession().createQuery(sb.toString());
+		createQuery.setParameter("empresa", 1);
+		createQuery.setParameter("id", id);
+		 
+		try {	
+			return (List<T>) createQuery.getResultList(); 
+		}catch (NoResultException nre){
+			return null;
+		} 
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<T> buscarPorChavePessoa(Integer id) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(" SELECT s ");
+		sb.append(" FROM ").append(PessoaVO.class.getSimpleName()).append(" s ");
 		sb.append(" WHERE ");
 		sb.append("     s.id.empresa = :empresa ");
 		sb.append(" AND s.id.id = :id ");
