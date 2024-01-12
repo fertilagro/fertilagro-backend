@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public enum AmostraEnum implements EnumInterface {
+public enum MatrizEnum implements EnumInterface {
 
 	SOLO(0, "Solo"),
 	FOLHA(1, "Folha"),
@@ -29,8 +29,8 @@ public enum AmostraEnum implements EnumInterface {
     private String nome;
 
 	@JsonCreator
-    public static AmostraEnum forValue(String value) {
-        for (AmostraEnum categoria : AmostraEnum.values()) {
+    public static MatrizEnum forValue(String value) {
+        for (MatrizEnum categoria : MatrizEnum.values()) {
             if (categoria.getNome().equals(value)) {
                 return categoria;
             }
@@ -43,12 +43,12 @@ public enum AmostraEnum implements EnumInterface {
         return nome;
     }
 
-    public static AmostraEnum verificaTipo(Integer s) {
-        for (AmostraEnum categoria : AmostraEnum.values()) {
+    public static MatrizEnum verificaTipo(Integer s) {
+        for (MatrizEnum categoria : MatrizEnum.values()) {
             if (categoria.getCategoria().equals(s)) {
                 return categoria;
             }
         }
-        throw new UnsupportedOperationException("A amostra " + s + " não é Compatível.");
+        throw new UnsupportedOperationException("A Matriz " + s + " não é Compatível.");
     }
 }

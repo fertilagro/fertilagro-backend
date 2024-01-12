@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fertilagro.fertilagroapp.conversor.LocalDateAttributeConverter;
-import com.fertilagro.fertilagroapp.enumerador.AmostraEnum;
+import com.fertilagro.fertilagroapp.enumerador.MatrizEnum;
 import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 
 import jakarta.persistence.Column;
@@ -60,8 +60,11 @@ public class AmostraVO extends SuperVO {
 	@Column(name = "DESCRICAO_AMOSTRA")
 	private String descricaoAmostra;
 	
-	@Column(name = "TIPO_ANALISE")
-	private AmostraEnum tipoAnalise;
+	@Column(name = "MATRIZ")
+	private MatrizEnum matriz;
+	
+	@Column(name = "TIPOANALISE")
+	private String tipoAnalise;
 
 	@Column(name = "VALOR")
 	private BigDecimal valor;

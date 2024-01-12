@@ -70,7 +70,7 @@ public class PessoaVO extends SuperVO {
 
 	@Override
 	public String getLabelFkfield() {
-		return this.id != null ? this.id.getId().toString()+ " - "+this.getRazaoSocial() : null;
+		return this.id != null ? this.id.getId().toString()+ " - "+this.getRazaoSocial()+ " - "+this.getCnpjCpf() : null;
 	}
 	
 	public void setCidade(CidadeVO cidade) {

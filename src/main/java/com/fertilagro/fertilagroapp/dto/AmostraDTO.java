@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fertilagro.fertilagroapp.dto.pk.EmpresaPadraoIdPKDTO;
 import com.fertilagro.fertilagroapp.entities.AmostraVO;
-import com.fertilagro.fertilagroapp.enumerador.AmostraEnum;
+import com.fertilagro.fertilagroapp.enumerador.MatrizEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +28,7 @@ public class AmostraDTO extends SuperDTO<AmostraVO> {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate saida;
 	private String descricaoAmostra;
-	private AmostraEnum tipoAnalise;
+	private MatrizEnum matriz;
 	private BigDecimal valor;
 	private String observacao;
 	
