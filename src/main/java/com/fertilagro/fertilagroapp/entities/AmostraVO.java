@@ -57,7 +57,7 @@ public class AmostraVO extends SuperVO {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate saida;
 	
-	@Column(name = "DESCRICAO_AMOSTRA")
+	@Column(name = "DESCRICAOAMOSTRA")
 	private String descricaoAmostra;
 	
 	@Column(name = "MATRIZ")

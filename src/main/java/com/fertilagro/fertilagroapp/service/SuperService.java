@@ -97,8 +97,12 @@ public abstract class SuperService<T extends SuperVO> {
 				EmpresaPadraoIdPK id = null;
 				// Obtém o valor do campo
 				id = (EmpresaPadraoIdPK) idField.get(entity);
-				return id.getId();
 				
+				if (id.getId() == null) {
+					return 0;
+				} else {					
+					return id.getId();
+				}
 			} catch (Exception e) {e.printStackTrace();}
 		}
 		return null;
