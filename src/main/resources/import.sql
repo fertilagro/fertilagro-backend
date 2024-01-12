@@ -14,6 +14,9 @@ CREATE TABLE public.cidade (
   CONSTRAINT cidade_pk PRIMARY KEY (empresa,id);
 );
 
+INSERT INTO public.sequencia (empresa, tabela, sequencia) VALUES(1, 'cidade', 0);
+
+
 
 CREATE TABLE public.pessoa (
 	empresa int2 NOT NULL,
@@ -27,6 +30,9 @@ CREATE TABLE public.pessoa (
 	status int2 NULL,
   CONSTRAINT pessoa_pk PRIMARY KEY (empresa,id)
 );
+INSERT INTO public.sequencia (empresa, tabela, sequencia) VALUES(1, 'pessoa', 0);
+
+
 
 CREATE TABLE public.pedido (
 	empresa int2 NOT NULL,
@@ -36,6 +42,9 @@ CREATE TABLE public.pedido (
 	status int2 NULL,
 	CONSTRAINT pedido_pk PRIMARY KEY (empresa, id)
 );
+INSERT INTO public.sequencia (empresa, tabela, sequencia) VALUES(1, 'pedido', 0);
+
+
 
 CREATE TABLE public.pedidoamostra (
 	empresa int2 NOT NULL,
@@ -45,6 +54,31 @@ CREATE TABLE public.pedidoamostra (
 	CONSTRAINT pedidoamostra_pk PRIMARY KEY (empresa, pedido, id),
 	CONSTRAINT fk_pedidoamostra_pedido FOREIGN KEY (pedido,empresa) REFERENCES <?>() ON UPDATE CASCADE
 );
+INSERT INTO public.sequencia (empresa, tabela, sequencia) VALUES(1, 'pedidoamostra', 0);
+
+
+
+CREATE TABLE public.amostra (
+	empresa int2 NOT NULL,
+	id int2 NOT NULL,
+	propriedade varchar(60) NOT NULL,
+	cliente int2 NOT NULL,
+	proprietario varchar(60) NOT NULL,
+	solicitante varchar(60) NOT NULL,
+	entrada date NOT NULL,
+	saida date NOT NULL,
+	descricaoamostra varchar(200) NOT NULL,
+	matriz int2 NOT NULL,
+	tipoanalise varchar(60) NOT NULL,
+	valor numeric(15, 4) NOT NULL,
+	observacao varchar(500) NULL,
+	status int2 NULL,
+	CONSTRAINT amostra_pk PRIMARY KEY (empresa, id),
+	CONSTRAINT fk_amostra_pessoa FOREIGN KEY (empresa,cliente) REFERENCES public.pessoa(empresa,id)
+);
+
+INSERT INTO public.sequencia (empresa, tabela, sequencia) VALUES(1, 'amostra', 0);
+
 
 
 
