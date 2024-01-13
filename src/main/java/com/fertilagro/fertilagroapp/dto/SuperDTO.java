@@ -1,8 +1,11 @@
 package com.fertilagro.fertilagroapp.dto;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fertilagro.fertilagroapp.dto.pk.EmpresaPadraoIdPKDTO;
 import com.fertilagro.fertilagroapp.dto.pk.EmpresaPedidoAmostraPKDTO;
 import com.fertilagro.fertilagroapp.entities.AmostraVO;
@@ -11,6 +14,7 @@ import com.fertilagro.fertilagroapp.entities.PedidoAmostraVO;
 import com.fertilagro.fertilagroapp.entities.PedidoVO;
 import com.fertilagro.fertilagroapp.entities.PessoaVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
+import com.fertilagro.fertilagroapp.enumerador.MatrizEnum;
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
 
 public abstract class SuperDTO<T extends SuperVO> {
@@ -84,11 +88,31 @@ public abstract class SuperDTO<T extends SuperVO> {
 			pedidoAmDTO.setLabelFkfield(listaVO.getLabelFkfield());
 			pedidoAmDTO.setDataKey(listaVO.getId().getEmpresa() + "|" + listaVO.getId().getPedido() + "|" + listaVO.getId().getId());
 			
+		    //AMOSTRA
+			AmostraDTO amostraDTO = new AmostraDTO();
+			EmpresaPadraoIdPKDTO idAmostra = new EmpresaPadraoIdPKDTO();
+			idAmostra.setEmpresa(listaVO.getAmostra().getId().getEmpresa());
+			idAmostra.setId(listaVO.getAmostra().getId().getId());
+			amostraDTO.setId(idAmostra);
+			amostraDTO.setSolicitante(listaVO.getAmostra().getSolicitante());
+			amostraDTO.setDataKey(idAmostra.getEmpresa() + "|" + idAmostra.getId());
 			
-		/*	private EmpresaPedidoAmostraPKDTO id;
-			private PedidoDTO pedido;
-			private AmostraDTO amostra;*/
+			/*
+			 	private String propriedade;	
+	private PessoaDTO cliente;	
+	private String solicitante;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate entrada;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate saida;
+	private String descricaoAmostra;
+	private MatrizEnum matriz;
+	private BigDecimal valor;
+	private String observacao;
+			 * */
 
+			pedidoAmDTO.setAmostra(amostraDTO);
+			
 			pedidosDTO.add(pedidoAmDTO);			
 		}
 		

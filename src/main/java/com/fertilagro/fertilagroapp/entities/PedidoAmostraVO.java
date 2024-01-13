@@ -35,8 +35,11 @@ public class PedidoAmostraVO extends SuperVO{
 			@JoinColumn(name = "PEDIDO", referencedColumnName = "ID", insertable = false, updatable = false)})
 	private PedidoVO pedido;
 	
-	@Column(name="AMOSTRA")
-	private Integer amostra;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns(value = {
+			@JoinColumn(name = "EMPRESA", referencedColumnName = "EMPRESA", insertable = false, updatable = false),
+			@JoinColumn(name = "AMOSTRA", referencedColumnName = "ID", insertable = false, updatable = false)})
+	private AmostraVO amostra;
 
 	@Override
 	public void setGerarIdentificadorId(Integer id) {

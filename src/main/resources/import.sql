@@ -52,7 +52,8 @@ CREATE TABLE public.pedidoamostra (
 	id int2 NOT NULL,
 	amostra int4 NULL,
 	CONSTRAINT pedidoamostra_pk PRIMARY KEY (empresa, pedido, id),
-	CONSTRAINT fk_pedidoamostra_pedido FOREIGN KEY (pedido,empresa) REFERENCES <?>() ON UPDATE CASCADE
+	CONSTRAINT fk_pedidoamostra_pedido FOREIGN KEY (pedido,empresa) REFERENCES pedido (id,empresa),
+	CONSTRAINT fk_pedidoamostra_amostra FOREIGN KEY (amostra,empresa) REFERENCES amostra (id,empresa)
 );
 INSERT INTO public.sequencia (empresa, tabela, sequencia) VALUES(1, 'PEDIDOAMOSTRA', 0);
 
