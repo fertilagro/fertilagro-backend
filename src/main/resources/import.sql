@@ -22,7 +22,7 @@ CREATE TABLE public.pessoa (
 	empresa int2 NOT NULL,
 	id int2 NOT NULL,
 	razaosocial varchar(60) NOT NULL,
-	cnpjcpf varchar(14) NOT NULL,
+	cnpjcpf varchar(18) NOT NULL,
 	telefone varchar(20) NOT NULL,
 	email varchar(120) NOT NULL,
 	endereco varchar(120) NOT NULL,

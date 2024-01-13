@@ -41,7 +41,7 @@ public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositori
 		sb.append(" FROM ").append(CidadeVO.class.getSimpleName()).append(" s ");
 		sb.append(" WHERE ");
 		sb.append("     s.id.empresa = :empresa ");
-		sb.append(" AND s.nome like '%").append(nome).append("%' ");
+		sb.append(" AND s.nome like UPPER('%").append(nome).append("%') ");
 		
 		Query createQuery = getSession().createQuery(sb.toString());
 		createQuery.setParameter("empresa", 1);
@@ -60,7 +60,7 @@ public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositori
 		sb.append(" FROM ").append(PessoaVO.class.getSimpleName()).append(" s ");
 		sb.append(" WHERE ");
 		sb.append("     s.id.empresa = :empresa ");
-		sb.append(" AND s.razaoSocial like '%").append(nome).append("%' ");
+		sb.append(" AND s.razaoSocial like UPPER('%").append(nome).append("%') ");
 		
 		Query createQuery = getSession().createQuery(sb.toString());
 		createQuery.setParameter("empresa", 1);
