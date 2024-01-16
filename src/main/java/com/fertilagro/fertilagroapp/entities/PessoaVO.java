@@ -46,7 +46,7 @@ public class PessoaVO extends SuperVO implements Serializable {
     @Column(name="ENDERECO")
     private String endereco;
     
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumns(value = {
 			@JoinColumn(name = "empresa", referencedColumnName = "empresa", insertable = false, updatable = false),
 			@JoinColumn(name = "cidade", referencedColumnName = "id", insertable = false, updatable = false)})

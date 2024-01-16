@@ -39,7 +39,7 @@ public class AmostraVO extends SuperVO implements Serializable {
 	@Column(name = "PROPRIEDADE")
 	private String propriedade;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumns(value = {
 			@JoinColumn(name = "empresa", referencedColumnName = "empresa", insertable = false, updatable = false),
 			@JoinColumn(name = "cliente", referencedColumnName = "id", insertable = false, updatable = false)})

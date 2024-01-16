@@ -43,33 +43,37 @@ public abstract class SuperDTO<T extends SuperVO> {
 	}
 
 	public CidadeDTO convertVOparaDTOCidade(CidadeVO cidade, CidadeDTO cidadeDTO) {
-		EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
-		id.setEmpresa(cidade.getId().getEmpresa());
-		id.setId(cidade.getId().getId());
-		
-		cidadeDTO.setId(id);
-		cidadeDTO.setNome(cidade.getNome());
-		cidadeDTO.setEstado(cidade.getEstado());
-		cidadeDTO.setLabelFkfield(cidade.getLabelFkfield());
+		if (cidade != null) {				
+			EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
+			id.setEmpresa(cidade.getId().getEmpresa());
+			id.setId(cidade.getId().getId());
+			
+			cidadeDTO.setId(id);
+			cidadeDTO.setNome(cidade.getNome());
+			cidadeDTO.setEstado(cidade.getEstado());
+			cidadeDTO.setLabelFkfield(cidade.getLabelFkfield());
+		}
 		return cidadeDTO;
 	}
 	
 	public PedidoDTO convertVOparaDTOPedido(PedidoVO pedido, PedidoDTO pedidoDTO) {
-		EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
-		id.setEmpresa(pedido.getId().getEmpresa());
-		id.setId(pedido.getId().getId());
-		
-		pedidoDTO.setId(id);
-		pedidoDTO.setLabelFkfield(pedido.getLabelFkfield());
-		
-		pedidoDTO.setData(pedido.getData());
-
-		PessoaDTO pessoa = new PessoaDTO();
-		pedidoDTO.setPessoa(convertVOparaDTOPessoa(pedido.getPessoa(),pessoa));
-		pedidoDTO.setStatus(StatusEnum.ATIVO);
-		
-		List<PedidoAmostraDTO> listDTO = new ArrayList<PedidoAmostraDTO>();
-		pedidoDTO.setPedidoAmostras(convertListVOparaDTOPedidoAmostra(pedido.getPedidoAmostras(),listDTO));
+		if (pedido != null) {				
+			EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
+			id.setEmpresa(pedido.getId().getEmpresa());
+			id.setId(pedido.getId().getId());
+			
+			pedidoDTO.setId(id);
+			pedidoDTO.setLabelFkfield(pedido.getLabelFkfield());
+			
+			pedidoDTO.setData(pedido.getData());
+			
+			PessoaDTO pessoa = new PessoaDTO();
+			pedidoDTO.setPessoa(convertVOparaDTOPessoa(pedido.getPessoa(),pessoa));
+			pedidoDTO.setStatus(StatusEnum.ATIVO);
+			
+			List<PedidoAmostraDTO> listDTO = new ArrayList<PedidoAmostraDTO>();
+			pedidoDTO.setPedidoAmostras(convertListVOparaDTOPedidoAmostra(pedido.getPedidoAmostras(),listDTO));
+		}
 	
 		return pedidoDTO;		
 	}
@@ -123,49 +127,52 @@ public abstract class SuperDTO<T extends SuperVO> {
 	}
 	
 	public PessoaDTO convertVOparaDTOPessoa(PessoaVO pessoa, PessoaDTO pessoaDTO) {
-		EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
-		id.setEmpresa(pessoa.getId().getEmpresa());
-		id.setId(pessoa.getId().getId());
-		
-		pessoaDTO.setId(id);
-		pessoaDTO.setLabelFkfield(pessoa.getLabelFkfield());
-		
-		pessoaDTO.setRazaoSocial(pessoa.getRazaoSocial());
-		pessoaDTO.setCnpjCpf(pessoa.getCnpjCpf());
-		pessoaDTO.setTelefone(pessoa.getTelefone());
-		pessoaDTO.setEmail(pessoa.getEmail());
-		pessoaDTO.setEndereco(pessoa.getEndereco());
-		
-		CidadeDTO cidade = new CidadeDTO();
-		pessoaDTO.setCidade(convertVOparaDTOCidade(pessoa.getCidade(),cidade));
-		
-		pessoaDTO.setStatus(StatusEnum.ATIVO);
-		pessoaDTO.setDataKey(pessoa.getId().getEmpresa()+"|"+pessoa.getId().getId());
+		if (pessoa != null) {				
+			EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
+			id.setEmpresa(pessoa.getId().getEmpresa());
+			id.setId(pessoa.getId().getId());
+			
+			pessoaDTO.setId(id);
+			pessoaDTO.setLabelFkfield(pessoa.getLabelFkfield());
+			
+			pessoaDTO.setRazaoSocial(pessoa.getRazaoSocial());
+			pessoaDTO.setCnpjCpf(pessoa.getCnpjCpf());
+			pessoaDTO.setTelefone(pessoa.getTelefone());
+			pessoaDTO.setEmail(pessoa.getEmail());
+			pessoaDTO.setEndereco(pessoa.getEndereco());
+			
+			CidadeDTO cidade = new CidadeDTO();
+			pessoaDTO.setCidade(convertVOparaDTOCidade(pessoa.getCidade(),cidade));
+			
+			pessoaDTO.setStatus(StatusEnum.ATIVO);
+			pessoaDTO.setDataKey(pessoa.getId().getEmpresa()+"|"+pessoa.getId().getId());
+		}
 	
 		return pessoaDTO;		
 	}
 
 	public AmostraDTO convertVOparaDTOAmostra(AmostraVO amostra, AmostraDTO amostraDTO) {
-		EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
-		id.setEmpresa(amostra.getId().getEmpresa());
-		id.setId(amostra.getId().getId());
-		amostraDTO.setId(id);
-		
-		amostraDTO.setLabelFkfield(amostra.getLabelFkfield());
-		amostraDTO.setDataKey(amostra.getId().getEmpresa()+"|"+amostra.getId().getId());
-		
-		amostraDTO.setPropriedade(amostra.getPropriedade());
-		PessoaDTO clienteDTO = new PessoaDTO();
-		amostraDTO.setCliente(convertVOparaDTOPessoa(amostra.getCliente(),clienteDTO));
-		amostraDTO.setSolicitante(amostra.getSolicitante());
-		amostraDTO.setEntrada(amostra.getEntrada());
-		amostraDTO.setSaida(amostra.getSaida());
-		amostraDTO.setDescricaoAmostra(amostra.getDescricaoAmostra());
-		amostraDTO.setTipoAnalise(amostra.getTipoAnalise());
-		amostraDTO.setValor(amostra.getValor());
-		amostraDTO.setObservacao(amostra.getObservacao());
-		amostraDTO.setMatriz(amostra.getMatriz());
-	
+		if (amostra != null) {			
+			EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
+			id.setEmpresa(amostra.getId().getEmpresa());
+			id.setId(amostra.getId().getId());
+			amostraDTO.setId(id);
+			
+			amostraDTO.setLabelFkfield(amostra.getLabelFkfield());
+			amostraDTO.setDataKey(amostra.getId().getEmpresa()+"|"+amostra.getId().getId());
+			
+			amostraDTO.setPropriedade(amostra.getPropriedade());
+			PessoaDTO clienteDTO = new PessoaDTO();
+			amostraDTO.setCliente(convertVOparaDTOPessoa(amostra.getCliente(),clienteDTO));
+			amostraDTO.setSolicitante(amostra.getSolicitante());
+			amostraDTO.setEntrada(amostra.getEntrada());
+			amostraDTO.setSaida(amostra.getSaida());
+			amostraDTO.setDescricaoAmostra(amostra.getDescricaoAmostra());
+			amostraDTO.setTipoAnalise(amostra.getTipoAnalise());
+			amostraDTO.setValor(amostra.getValor());
+			amostraDTO.setObservacao(amostra.getObservacao());
+			amostraDTO.setMatriz(amostra.getMatriz());
+		}
 		return amostraDTO;		
 	}
 }
