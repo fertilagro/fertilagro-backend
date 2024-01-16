@@ -1,5 +1,7 @@
 package com.fertilagro.fertilagroapp.entities;
 
+import java.io.Serializable;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -24,7 +26,9 @@ import lombok.Setter;
 @DynamicUpdate
 @Getter
 @Setter
-public class PedidoAmostraVO extends SuperVO{
+public class PedidoAmostraVO extends SuperVO implements Serializable {
+
+	private static final long serialVersionUID = -1919328791634990978L;
 
 	@EmbeddedId
 	private EmpresaPedidoAmostraPK id;

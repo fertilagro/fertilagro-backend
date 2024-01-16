@@ -1,5 +1,7 @@
 package com.fertilagro.fertilagroapp.entities;
 
+import java.io.Serializable;
+
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
 import com.fertilagro.fertilagroapp.pk.EmpresaPadraoIdPK;
 
@@ -22,7 +24,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PessoaVO extends SuperVO {
+public class PessoaVO extends SuperVO implements Serializable {
+
+	private static final long serialVersionUID = 98498007237252021L;
 
 	@EmbeddedId
 	private EmpresaPadraoIdPK id;

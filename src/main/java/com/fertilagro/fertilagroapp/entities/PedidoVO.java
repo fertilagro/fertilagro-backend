@@ -1,5 +1,6 @@
 package com.fertilagro.fertilagroapp.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,7 +27,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "pedido")
-public class PedidoVO extends SuperVO {
+public class PedidoVO extends SuperVO implements Serializable {
+
+	private static final long serialVersionUID = -2449318246403973988L;
 
 	@EmbeddedId
 	private EmpresaPadraoIdPK id;

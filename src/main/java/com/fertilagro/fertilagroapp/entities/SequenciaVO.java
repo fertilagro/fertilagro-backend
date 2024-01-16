@@ -1,5 +1,7 @@
 package com.fertilagro.fertilagroapp.entities;
 
+import java.io.Serializable;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -20,8 +22,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @IdClass(SequenciaPK.class)
-public class SequenciaVO extends SuperVO {
+public class SequenciaVO extends SuperVO implements Serializable {
 
+	private static final long serialVersionUID = 4843278262026911113L;
 	@Id
 	private Integer empresa;
 	@Id
