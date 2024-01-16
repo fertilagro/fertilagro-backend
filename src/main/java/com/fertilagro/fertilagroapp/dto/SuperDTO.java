@@ -145,50 +145,26 @@ public abstract class SuperDTO<T extends SuperVO> {
 		return pessoaDTO;		
 	}
 
-	public AmostraDTO convertVOparaDTOAmostras(AmostraVO amostra, AmostraDTO amostraDTO) {
+	public AmostraDTO convertVOparaDTOAmostra(AmostraVO amostra, AmostraDTO amostraDTO) {
 		EmpresaPadraoIdPKDTO id = new EmpresaPadraoIdPKDTO();
 		id.setEmpresa(amostra.getId().getEmpresa());
 		id.setId(amostra.getId().getId());
-		
 		amostraDTO.setId(id);
 		
-		/*private EmpresaPadraoIdPK id;
+		amostraDTO.setLabelFkfield(amostra.getLabelFkfield());
+		amostraDTO.setDataKey(amostra.getId().getEmpresa()+"|"+amostra.getId().getId());
 		
-		@Column(name = "PROPRIEDADE")
-		private String propriedade;
-		
-		@ManyToOne(fetch = FetchType.LAZY)
-		@JoinColumns(value = {
-				@JoinColumn(name = "empresa", referencedColumnName = "empresa", insertable = false, updatable = false),
-				@JoinColumn(name = "cliente", referencedColumnName = "id", insertable = false, updatable = false)})
-		private PessoaVO cliente;
-		@Column(name="CLIENTE")
-		private Integer clienteId;
-
-		@Column(name = "SOLICITANTE")
-		private String solicitante;
-		
-		@Column(name = "ENTRADA")
-		@Convert(converter = LocalDateAttributeConverter.class)
-		@JsonFormat(pattern = "yyyy-MM-dd")
-		private LocalDate entrada;
-		
-		@Column(name = "SAIDA")
-		@Convert(converter = LocalDateAttributeConverter.class)
-		@JsonFormat(pattern = "yyyy-MM-dd")
-		private LocalDate saida;
-		
-		@Column(name = "DESCRICAO_AMOSTRA")
-		private String descricaoAmostra;
-		
-		@Column(name = "TIPO_ANALISE")
-		private AmostraEnum tipoAnalise;
-
-		@Column(name = "VALOR")
-		private BigDecimal valor;
-		
-		@Column(name = "OBSERVACAO", length = 800)
-		private String observacao;*/
+		amostraDTO.setPropriedade(amostra.getPropriedade());
+		PessoaDTO clienteDTO = new PessoaDTO();
+		amostraDTO.setCliente(convertVOparaDTOPessoa(amostra.getCliente(),clienteDTO));
+		amostraDTO.setSolicitante(amostra.getSolicitante());
+		amostraDTO.setEntrada(amostra.getEntrada());
+		amostraDTO.setSaida(amostra.getSaida());
+		amostraDTO.setDescricaoAmostra(amostra.getDescricaoAmostra());
+		amostraDTO.setTipoAnalise(amostra.getTipoAnalise());
+		amostraDTO.setValor(amostra.getValor());
+		amostraDTO.setObservacao(amostra.getObservacao());
+		amostraDTO.setMatriz(amostra.getMatriz());
 	
 		return amostraDTO;		
 	}

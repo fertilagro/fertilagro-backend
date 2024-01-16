@@ -3,6 +3,7 @@ package com.fertilagro.fertilagroapp.repositorio;
 import java.util.List;
 
 import com.fertilagro.fertilagroapp.arquitetura.BaseRepositorio;
+import com.fertilagro.fertilagroapp.entities.AmostraVO;
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
 import com.fertilagro.fertilagroapp.entities.PedidoVO;
 import com.fertilagro.fertilagroapp.entities.PessoaVO;
@@ -120,6 +121,8 @@ public abstract class SuperRepositorio<T extends SuperVO> extends BaseRepositori
 			sb.append(" FROM ").append(PedidoVO.class.getSimpleName()).append(" s ");
 		} else if (tipo.equals("cidades")) {
 			sb.append(" FROM ").append(CidadeVO.class.getSimpleName()).append(" s ");
+		} else if (tipo.equals("amostras")) {
+			sb.append(" FROM ").append(AmostraVO.class.getSimpleName()).append(" s ");
 		} else {
 			
 		}

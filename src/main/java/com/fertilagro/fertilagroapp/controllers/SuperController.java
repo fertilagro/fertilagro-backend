@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fertilagro.fertilagroapp.arquitetura.EntityUteis;
+import com.fertilagro.fertilagroapp.dto.AmostraDTO;
 import com.fertilagro.fertilagroapp.dto.CidadeDTO;
 import com.fertilagro.fertilagroapp.dto.FkfieldDTO;
 import com.fertilagro.fertilagroapp.dto.PedidoDTO;
 import com.fertilagro.fertilagroapp.dto.PessoaDTO;
 import com.fertilagro.fertilagroapp.dto.SuperDTO;
+import com.fertilagro.fertilagroapp.entities.AmostraVO;
 import com.fertilagro.fertilagroapp.entities.CidadeVO;
 import com.fertilagro.fertilagroapp.entities.PedidoVO;
 import com.fertilagro.fertilagroapp.entities.PessoaVO;
@@ -209,6 +211,23 @@ public abstract class SuperController<T extends SuperVO, C extends SuperDTO<T>> 
 		CidadeDTO crudDTO = new CidadeDTO();
 		CidadeVO crud = (CidadeVO) getSuperService().buscarPorId(empresa, id, tipo);
 		crudDTO.convertVOparaDTOCidade(crud, crudDTO);
+		
+		return ResponseEntity.ok(crudDTO);
+    }
+	
+	@PostMapping("/buscarPorIdAmostra")
+    public ResponseEntity<AmostraDTO> buscarPorIdAmostra(@RequestBody HashMap<String, Object> param) {
+		ObjectMapper mapper = uteis.getObjectMapper();
+		String tipo = mapper.convertValue(param.get("tipo"), String.class);
+		Object value = mapper.convertValue(param.get("value"), Object.class);
+		
+		LinkedHashMap<String, Integer> linkedHashMap = (LinkedHashMap<String, Integer>) value;
+		Integer empresa = linkedHashMap.get("empresa");
+		Integer id = linkedHashMap.get("id");
+		
+		AmostraDTO crudDTO = new AmostraDTO();
+		AmostraVO crud = (AmostraVO) getSuperService().buscarPorId(empresa, id, tipo);
+		crudDTO.convertVOparaDTOAmostra(crud, crudDTO);
 		
 		return ResponseEntity.ok(crudDTO);
     }

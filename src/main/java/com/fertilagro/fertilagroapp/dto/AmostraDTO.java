@@ -29,6 +29,7 @@ public class AmostraDTO extends SuperDTO<AmostraVO> {
 	private LocalDate saida;
 	private String descricaoAmostra;
 	private MatrizEnum matriz;
+	private String tipoAnalise;
 	private BigDecimal valor;
 	private String observacao;
 	
