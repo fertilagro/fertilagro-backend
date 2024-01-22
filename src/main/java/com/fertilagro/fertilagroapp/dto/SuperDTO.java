@@ -98,10 +98,22 @@ public abstract class SuperDTO<T extends SuperVO> {
 			idAmostra.setEmpresa(listaVO.getAmostra().getId().getEmpresa());
 			idAmostra.setId(listaVO.getAmostra().getId().getId());
 			amostraDTO.setId(idAmostra);
-			amostraDTO.setSolicitante(listaVO.getAmostra().getSolicitante());
 			amostraDTO.setDataKey(idAmostra.getEmpresa() + "|" + idAmostra.getId());
 			
 			pedidoAmDTO.setAmostra(amostraDTO);
+			
+			// CONTINUA PEDIDOAMOSTRA
+			pedidoAmDTO.setIdAmostra(listaVO.getAmostra().getId().getId());
+			pedidoAmDTO.setPropriedade(listaVO.getAmostra().getPropriedade());
+			pedidoAmDTO.setNomeCliente(listaVO.getAmostra().getCliente().getRazaoSocial());
+			pedidoAmDTO.setSolicitante(listaVO.getAmostra().getSolicitante());
+			pedidoAmDTO.setEntrada(listaVO.getAmostra().getEntrada());
+			pedidoAmDTO.setSaida(listaVO.getAmostra().getSaida());
+			pedidoAmDTO.setDescricaoAmostra(listaVO.getAmostra().getDescricaoAmostra());
+			pedidoAmDTO.setMatriz(listaVO.getAmostra().getMatriz().getNome());
+			pedidoAmDTO.setTipoAnalise(listaVO.getAmostra().getTipoAnalise());
+			pedidoAmDTO.setValor(listaVO.getAmostra().getValor());
+			pedidoAmDTO.setObservacao(listaVO.getAmostra().getObservacao());
 			
 			pedidosDTO.add(pedidoAmDTO);			
 		}
