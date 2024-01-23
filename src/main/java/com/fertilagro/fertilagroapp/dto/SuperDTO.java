@@ -1,11 +1,10 @@
 package com.fertilagro.fertilagroapp.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fertilagro.fertilagroapp.dto.pk.EmpresaPadraoIdPKDTO;
 import com.fertilagro.fertilagroapp.dto.pk.EmpresaPedidoAmostraPKDTO;
 import com.fertilagro.fertilagroapp.entities.AmostraVO;
@@ -14,7 +13,6 @@ import com.fertilagro.fertilagroapp.entities.PedidoAmostraVO;
 import com.fertilagro.fertilagroapp.entities.PedidoVO;
 import com.fertilagro.fertilagroapp.entities.PessoaVO;
 import com.fertilagro.fertilagroapp.entities.SuperVO;
-import com.fertilagro.fertilagroapp.enumerador.MatrizEnum;
 import com.fertilagro.fertilagroapp.enumerador.StatusEnum;
 
 public abstract class SuperDTO<T extends SuperVO> {
@@ -112,15 +110,14 @@ public abstract class SuperDTO<T extends SuperVO> {
 			pedidoAmDTO.setDescricaoAmostra(listaVO.getAmostra().getDescricaoAmostra());
 			pedidoAmDTO.setMatriz(listaVO.getAmostra().getMatriz().getNome());
 			pedidoAmDTO.setTipoAnalise(listaVO.getAmostra().getTipoAnalise());
-			pedidoAmDTO.setValor(listaVO.getAmostra().getValor());
 			pedidoAmDTO.setObservacao(listaVO.getAmostra().getObservacao());
 			
+			BigDecimal valor = listaVO.getAmostra().getValor().setScale(2, RoundingMode.HALF_UP);
+			pedidoAmDTO.setValor(valor);
+
 			pedidosDTO.add(pedidoAmDTO);			
 		}
-		
-		
-		
-	
+
 		return pedidosDTO;		
 	}
 	
